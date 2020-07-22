@@ -1,0 +1,64 @@
+<h3 class="page-name" style="position:relative">
+  <ol class="breadcrumb d-flex">
+    <li class="breadcrumb-item active">SCAN PO RETURN</li>
+  </ol>
+</h3>
+<div class="p-2 d-flex flex-column col-lg-12">
+  <table class="table table-sm">
+    <tbody>
+      <tr>
+        <td>Order Code</td>
+        <td>
+          <span class="badge badge-info">{{barCodeInfo.OrderCode}}</span>
+        </td>
+        <td>PassCode</td>
+        <td>
+          <span class="badge badge-info">{{barCodeInfo.Password}}</span>
+        </td>
+        <td>Language</td>
+        <td>
+          <span class="badge badge-info">{{barCodeInfo.Language}}</span>
+        </td>
+      </tr>
+      <tr>
+        <td>Mailing Indicator</td>
+        <td>
+          <span class="badge badge-info">{{barCodeInfo.MailingIndicator}}</span>
+        </td>
+        <td>Pre-Incentive</td>
+        <td>
+          <span class="badge badge-info">{{preIncentive|currency:'USD':true}}</span>
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="card p-1">
+    <div class="card-header">
+      Choose Return Code
+      <span style="margin-left: 25%;" [innerHtml]="SetImage()"></span>
+      <!-- <button type="button" (click)="Update($event)" class="btn btn-success" style="float: right;">Done</button> -->
+    </div>
+    <div class="card-block row col-lg-12">
+      <ul class="list-group border-none font-red col-lg-6 list-group-flush">
+        <li class="list-group-item" *ngFor="let returnCode of redCodes">
+          <div class="radio">
+            <input id="{{'red'+returnCode.TextCode}}" type="radio" (ngModelChange)="SetReturnCode($event)" [(ngModel)]="selectedReturnCode"
+              name="returnCode" [value]="returnCode.NumericCode" />
+            <label for="{{'red'+returnCode.TextCode}}">{{returnCode.Text}}</label>
+          </div>
+        </li>
+      </ul>
+      <ul class="list-group border-none font-green col-lg-6 list-group-flush">
+        <li class="list-group-item" *ngFor="let returnCode of greenCodes">
+          <div class="radio">
+            <input id="{{'green'+returnCode.TextCode}}" type="radio" (ngModelChange)="SetReturnCode($event)" [(ngModel)]="selectedReturnCode"
+              name="returnCode" [value]="returnCode.NumericCode" />
+            <label for="{{'green'+returnCode.TextCode}}">{{returnCode.Text}}</label>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

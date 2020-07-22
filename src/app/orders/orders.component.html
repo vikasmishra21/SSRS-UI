@@ -1,0 +1,45 @@
+﻿<div class="d-flex flex-row ribbon" *ngIf="ShowOverviewRibbon()">
+  <div class="p-2 ribbon-block " appPermission permissionCode="101" (click)="OpenAddNewOrderModal()"><i class="fa fa-plus-square"></i><br/><span>New Order</span>
+  </div>
+  <div class="p-2 ribbon-block " appPermission permissionCode="102" routerLink="/orders/incentives" routerLinkActive="active"><i class="fa fa-file"></i><br/><span>Incentive Rules</span>
+  </div>
+  <div class="p-2 ribbon-block " appPermission permissionCode="103" routerLink="/orders/cleaning" routerLinkActive="active"><i class="fa fa-filter"></i><br/><span>Cleaning Rules</span>
+  </div>
+</div>
+<div class="d-flex flex-row ribbon" *ngIf="!ShowOverviewRibbon()">
+  <div appPermission permissionCode="201" class="p-2 ribbon-block " routerLink="/orders/orderdetails" routerLinkActive="active">
+    <i class="fa fa-file-text-o"></i><br /><span>Order Details</span>
+  </div>
+  <div class="p-2 ribbon-block " appPermission permissionCode="202"  routerLink="/orders/sampleupload" routerLinkActive="active">
+    <i class="fa fa-upload"></i><br/><span>Sample Upload</span>
+  </div>
+  <div appPermission permissionCode="203" class="p-2 ribbon-block " routerLink="/orders/viewsamples" routerLinkActive="active">
+    <i class="fa fa-eye"></i><br/><span>View Samples</span>
+  </div>
+  <div appPermission permissionCode="204" class="p-2 ribbon-block " routerLink="/orders/initialmailer" routerLinkActive="active">
+    <i class="fa fa-envelope"></i><br/><span>Initial Mailer</span>
+  </div>
+  <div appPermission permissionCode="205" class="p-2 ribbon-block " routerLink="/orders/remindermailer" routerLinkActive="active">
+    <i class="fa fa-bell"></i><br/><span>Reminder Mailer</span>
+  </div>
+  <div appPermission permissionCode="206" class="p-2 ribbon-block " routerLink="/orders/final-data-extract" routerLinkActive="active">
+    <i class="fa fa-file"></i><br/><span>Final Extract</span>
+  </div>
+  <div appPermission permissionCode="207" class="p-2 ribbon-block " routerLink="/orders/scorecarding" routerLinkActive="active">
+    <i class="fa fa-star"></i><br/><span>Scorecarding</span>
+  </div>
+  <div appPermission permissionCode="208" class="p-2 ribbon-block " routerLink="/orders/incentivereport" routerLinkActive="active">
+    <i class="fa fa-file-text"></i><br /><span>Incentive Report</span>
+  </div>
+  <div appPermission permissionCode="209"  class="p-2 ribbon-block " routerLink="/orders/closeorder" routerLinkActive="active">
+    <i class="fa fa-times"></i><br /><span>Close Order</span>
+  </div>
+
+  <div appPermission permissionCode="210" class="p-2 ribbon-block " routerLink="/orders/deleteorder" routerLinkActive="active">
+    <i class="fa fa-trash"></i><br /><span>Delete Order</span>
+  </div>
+
+</div>
+<div class="clearfix"></div>
+
+<router-outlet></router-outlet>

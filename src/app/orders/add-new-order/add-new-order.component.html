@@ -1,0 +1,265 @@
+﻿<div class="modal-header add-new-head">
+  <h4 class="modal-title">Add New Order</h4>
+  <i class="fa fa-times" aria-hidden="true" (click)="activeModal.dismiss('Cross click')"></i>
+</div>
+<div class="modal-body add-new-body">
+  <form (submit)="CreateOrder()">
+    <div class="form-group row required ">
+      <label class="control-label col-sm-4">Order Code:</label>
+      <div class="col-sm-8">
+        <!-- <input type="text" class="form-control" [(ngModel)]="formData.oscTemplateName" id="name" placeholder="OSC Template Name"> -->
+        <input [disabled]="IsEdit" type="text" required class="form-control" name="orderCode" [(ngModel)]="formData.orderCode" id="orderCode"
+          placeholder="OSC Template Code" />
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="form-group row required">
+      <label class="control-label col-sm-4">Hard Close Date:</label>
+      <div class="col-sm-8">
+        <div class="form-group">
+          <div class="input-group">
+            <!-- <ngx-datepicker  class="form-control" [(ngModel)]="formData.hardCloseDate"></ngx-datepicker> -->
+            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="formData.hardCloseDate" ngbDatepicker #d="ngbDatepicker"
+              [minDate]="minDate">
+            <button class="input-group-addon" (click)="d.toggle()" type="button">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="form-group row required">
+      <label class="control-label col-sm-4">OSC Template Name:</label>
+      <div *ngIf="!IsEdit" class="col-sm-8 flex-row">
+        <select style="width:64px;display:inline-block" class="form-control col-md-2" name="Month" [(ngModel)]="selectedItems.selectedMonth">
+          <option *ngFor="let month of months" [value]="month">
+            {{month}}
+          </option>
+        </select>
+
+        <span>-</span>
+        <select style="width:60px;display:inline-block" class="form-control col-md-2" name="YearSelectBox" [(ngModel)]="selectedItems.selectedYear">
+          <option *ngFor="let year of years" [value]="year">
+            {{year}}
+          </option>
+        </select>
+
+        <span>-</span>
+        <input name="orderCodeInput" type="text" [disabled]="true" [(ngModel)]="formData.orderCode" class="col-md-4 form-control"
+          style="display:inline-block" />
+
+      </div>
+      <div *ngIf="IsEdit" class="col-sm-8 flex-row">
+        <input [disabled]="true" type="text" class="form-control" [(ngModel)]="formData.oscTemplateName" name="templatename" id="templatename"
+          placeholder="OSC Template Name">
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="form-group row required">
+      <label class="control-label col-sm-4">Order Type:</label>
+      <div class="col-sm-8">
+        <select name="orderType" [disabled]="IsEdit" class="form-control" (ngModelChange)="getIncentiveRules($event)" [(ngModel)]="formData.orderType">
+          <option value="">--select--</option>
+          <option *ngFor="let c of orderType" [value]="c.code">{{c.name}}</option>
+        </select>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <ngb-accordion>
+      <ngb-panel id="static-1" title="Initial Mailing iFactor Rules" [disabled]="IsInitial">
+        <ng-template ngbPanelContent>
+          <div class="card">
+            <div class="card-header required">
+              <label> Pre-Incentive Rule</label>
+            </div>
+            <div class="card-block">
+              <div class="d-flex flex-row">
+                <div class="p-2 col-md-5">
+                  <div class="radio" *ngFor="let i of IncentiveRules">
+                    <input id="{{'preIncentive1'+i.Name}}" type="radio" (change)="descriptions.preIncentive=i.Rule" [(ngModel)]="formData.initialMailPre"
+                      name="initialmailPre" [value]="i.ID" />
+                    <label for="{{'preIncentive1'+i.Name}}">{{i.Name}}</label>
+                  </div>
+                </div>
+                <div class="p-2 alert full-width alert-info margin-5" *ngIf="descriptions.preIncentive">{{descriptions.preIncentive}}</div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="card">
+            <div class="card-header required">
+              <label> Post-Incentive Rule</label>
+            </div>
+            <div class="card-block">
+              <div class="d-flex flex-row">
+                <div class="p-2 col-md-5">
+                  <div class="radio" *ngFor="let i of IncentiveRules">
+                    <input [disabled]="IsInitial" id="{{'postIncentive1'+i.Name}}" type="radio" [(ngModel)]="formData.initialMailPost" (change)="descriptions.postIncentive=i.Rule;RuleChanged(i.Rule, 'Initial');"
+                      name="initialmailPost" [value]="i.ID" />
+                    <label for="{{'postIncentive1'+i.Name}}">{{i.Name}}</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="p-2 alert alert-info margin-5" *ngIf="descriptions.postIncentive">{{descriptions.postIncentive}}</div>
+                </div>
+                <table *ngIf="InitialIncentiveIntegerMapping.length>0" class="table table-bordered" style="width:20%;margin-top:5px;">
+                  <tbody>
+                    <tr *ngFor="let Incentive of InitialIncentiveIntegerMapping;let i=index">
+                      <td>{{Incentive}}</td>
+                      <td>
+
+                        <select name="{{'initialmailInteger'+i}}" id="{{'dd-'+i}}" class="form-control" (change)="PopulateIncentiveInteger($event,'Initial',Incentive)"
+                          [ngModel]="formData.InitialIncentiveMapping[Incentive]" style="height:30px;">
+                          <option *ngFor="let integer of IncentiveInteger" [value]="integer">{{integer}}</option>
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel id="static-2" title="Reminder One Mailing iFactor Rules" [disabled]="DisabledFields.IsRem1">
+        <ng-template ngbPanelContent>
+          <div class="card">
+            <div class="card-header required">
+              <label>Pre-Incentive Rule</label>
+            </div>
+            <div class="card-block">
+              <div class="d-flex flex-row">
+                <div class="p-2 col-md-5">
+                  <div class="radio" *ngFor="let i of IncentiveRules">
+                    <input id="{{'preIncentive2'+i.Name}}" type="radio" [(ngModel)]="formData.Reminder1MailPre" (change)="descriptions.preReminder1=i.Rule"
+                      name="Reminder1mailpre" [value]="i.ID" />
+                    <label for="{{'preIncentive2'+i.Name}}">{{i.Name}}</label>
+                  </div>
+                </div>
+                <div class="p-2 alert full-width alert-info margin-5" *ngIf="descriptions.preReminder1">{{descriptions.preReminder1}}</div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="card">
+            <div class="card-header required">
+              <label>Post-Incentive Rule</label>
+            </div>
+            <div class="card-block">
+              <div class="d-flex flex-row">
+                <div class="p-2 col-md-5">
+                  <div class="radio" *ngFor="let i of IncentiveRules">
+                    <input id="{{'postIncentive2'+i.Name}}" type="radio" [(ngModel)]="formData.Reminder1MailPost" (change)="descriptions.postReminder1=i.Rule;RuleChanged(i.Rule, 'Reminder1');"
+                      name="Remindermailpost" [value]="i.ID" />
+                    <label for="{{'postIncentive2'+i.Name}}">{{i.Name}}</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="p-2 alert full-width alert-info margin-5" *ngIf="descriptions.postReminder1">{{descriptions.postReminder1}}</div>
+                </div>
+                <table class="table table-bordered" style="width:20%;margin-top:5px;">
+                  <tbody>
+                    <tr *ngFor="let Incentive of Reminder1IncentiveIntegerMapping;let i=index">
+                      <td>{{Incentive}}</td>
+                      <td>
+                        <select name="{{'reminder1mailInteger'+i}}" class="form-control" id="{{'reminder1' + i}}" (change)="PopulateIncentiveInteger($event,'Reminder1',Incentive)"
+                          [ngModel]="formData.Reminder1IncentiveMapping[Incentive]">
+                          <option *ngFor="let integer of IncentiveInteger" [value]="integer">{{integer}}</option>
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel id="static-3" title="Reminder Two Mailing iFactor Rules" [disabled]="DisabledFields.IsRem2">
+        <ng-template ngbPanelContent>
+          <div class="card">
+            <div class="card-header">
+              <label> Pre-Incentive Rule</label>
+            </div>
+            <div class="card-block">
+              <div class="d-flex flex-row">
+                <div class="p-2 col-md-5">
+                  <div class="radio" *ngFor="let i of IncentiveRules">
+                    <input id="{{'preIncentive3'+i.Name}}" type="radio" [(ngModel)]="formData.Reminder2MailPre" (change)="descriptions.preReminder2=i.Rule"
+                      name="Reminder2mailpre" [value]="i.ID" />
+                    <label for="{{'preIncentive3'+i.Name}}">{{i.Name}}</label>
+                  </div>
+                </div>
+                <div class="p-2 alert full-width alert-info margin-5" *ngIf="descriptions.preReminder2">{{descriptions.preReminder2}}</div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="card">
+            <div class="card-header">
+              Post-Incentive Rule
+            </div>
+            <div class="card-block">
+              <div class="d-flex flex-row">
+                <div class="p-2 col-md-5">
+                  <div class="radio" *ngFor="let i of IncentiveRules">
+                    <input id="{{'postIncentive3'+i.Name}}" type="radio" [(ngModel)]="formData.Reminder2MailPost" (change)="descriptions.postReminder2=i.Rule;RuleChanged(i.Rule, 'Reminder2');"
+                      name="Reminder2mailpost" [value]="i.ID" />
+                    <label for="{{'postIncentive3'+i.Name}}">{{i.Name}}</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="p-2 alert full-width  alert-info margin-5" *ngIf="descriptions.postReminder2">{{descriptions.postReminder2}}</div>
+                </div>
+                <table class="table table-bordered" style="width:20%;margin-top:5px;">
+                  <tbody>
+                    <tr *ngFor="let Incentive of Reminder2IncentiveIntegerMapping;let i=index">
+                      <td>{{Incentive}}</td>
+                      <td>
+                        <select class="form-control" name="{{'reminder2Integer' +i}}" id="{{'reminder2' +i}}" (change)="PopulateIncentiveInteger($event,'Reminder2',Incentive)"
+                          [ngModel]="formData.Reminder2IncentiveMapping[Incentive]">
+                          <option *ngFor="let integer of IncentiveInteger" [value]="integer">{{integer}}</option>
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel id="static-4" title="Cleaning Rules">
+        <ng-template ngbPanelContent>
+          <div class="card">
+            <div class="card-block">
+              <div class="d-flex flex-row">
+                <div class="p-2 col-md-5">
+                  <div class="radio" *ngFor="let c of CleaningRules">
+                    <input id="{{c.Name}}" type="radio" [(ngModel)]="formData.cleaningRule" (change)="descriptions.cleaning=c.Filename" name="cleaning Rule"
+                      [value]="c.ID" />
+                    <label for="{{c.Name}}">{{c.Name}}</label>
+                  </div>
+                </div>
+                <div class="p-2 alert full-width  alert-info margin-5" *ngIf="descriptions.cleaning">{{descriptions.cleaning}}</div>
+              </div>
+            </div>
+          </div>
+          <br />
+
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+
+  </form>
+</div>
+<div class="modal-footer">
+
+  <div *ngIf="error" style="color:red">{{errorMessage}}</div>
+  <ngb-progressbar *ngIf="ValidatingValue != 0" type="info" [value]="ValidatingValue" [striped]="true" [animated]="true" class="col-md-9">{{ValidateText}}</ngb-progressbar>
+  <button type="button" class="btn btn-success" (click)="CreateOrder()">Submit</button>
+  <button type="button" class="btn btn-danger" (click)="activeModal.close('Close click')">Close</button>
+</div>

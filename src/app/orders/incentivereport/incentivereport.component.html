@@ -1,0 +1,72 @@
+﻿<h3 class="page-name" style="position:relative">
+  <ol class="breadcrumb d-flex">
+    <li class="breadcrumb-item active">Incentive Summary Report / Order ID : {{orderCode}}</li>
+  </ol>
+</h3>
+
+<div class="col-md-6 pull-left">
+  <h6>OutFlow</h6>
+  <table class="table table-bordered" style="table-layout:fixed">
+    <tbody>
+      <tr>
+        <td>Initial Mailer Pre-Incentive</td>
+        <td>${{responseArray.InitialMailerPreIncentive}}</td>
+      </tr>
+      <tr>
+        <td>Reminer1 Pre-Incentive</td>
+        <td>${{responseArray.Reminder1MailerPreIncentive}}</td>
+      </tr>
+      <tr>
+        <td>Reminer2 Pre-Incentive</td>
+        <td>${{responseArray.Reminder2MailerPreIncentive}}</td>
+      </tr>
+      <tr>
+        <td>Promised Incentive</td>
+        <td>${{responseArray.PromisedReturn}}</td>
+      </tr>
+      <tr>
+        <td><b>Total</b></td>
+        <td><b>${{responseArray.totalOutFlow}}</b></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="col-md-6 pull-right">
+  <h6>InFLow</h6>
+  <table class="table table-bordered col-md-6" style="table-layout:fixed">
+    <tbody>
+      <tr>
+        <td>Initial Mailer PO Returns</td>
+        <td>${{responseArray.InitialPOReturns}}</td>
+      </tr>
+      <tr>
+        <td>Reminder1 PO Returns</td>
+        <td>${{responseArray.Reminder1POreturns}}</td>
+      </tr>
+      <tr>
+        <td>Reminder2 PO Returns</td>
+        <td>${{responseArray.Reminder2POreturns}}</td>
+      </tr>
+      <tr>
+        <td><b>Total</b></td>
+        <td><b>${{responseArray.totalInFlow}}</b></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="clearfix"></div>
+<!--<div class="col-md-12">
+  <h6>Total Cost</h6>
+  <table class="table table-bordered col-md-6">
+    <tbody>
+      <tr>
+        <td><b>Total</b></td>
+        <td><b>${{responseArray.netCost}}</b></td>
+      </tr>
+    </tbody>
+  </table>
+</div>-->
+
+<div class="pull-right">
+  <button type="button" class="btn btn-primary" (click)="DownloadCSV()">Download Report</button>
+</div>

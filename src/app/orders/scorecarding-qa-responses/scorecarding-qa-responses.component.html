@@ -1,0 +1,40 @@
+<h3 class="page-name" style="position:relative">
+  <ol class="breadcrumb d-flex">
+    <li class="breadcrumb-item active">SCORECARDING QA Responses / Order Code : {{orderCode}}</li>
+  </ol>
+</h3>
+<div class="d-flex flex-column">
+  <div *ngIf="ShowPullPercentInput" class="form-inline col-lg-6">
+    <div class="form-group col-lg-6">
+      <label for="number" class="col-form-label col-lg-8">Enter Percentage to Pull</label>
+      <input type="number" min="1" max="100" [(ngModel)]="PullPercent" class="form-control col-lg-4" id="number" placeholder="%">
+    </div>
+    <button type="submit" [disabled]="!PullPercent" (click)="Pull()" class="btn btn-success">Pull</button>
+  </div>
+  <hr/>
+  <app-data-table [data]="gridData.data" [settings]="gridData.settings" [columnconfig]="gridData.columnconfig" [(events)]="gridData.events"
+    class="data-table"></app-data-table>
+  <hr/>
+  <div class="col-lg-12 d-flex flex-row">
+    <div class="col-lg-4">
+      <h6>Overall</h6>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">Completed</th>
+            <td>{{Summary.Completed}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Incompleted</th>
+            <td>{{Summary.Incompleted}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Total</th>
+            <td>{{Summary.Total}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

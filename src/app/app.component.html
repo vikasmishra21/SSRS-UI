@@ -1,0 +1,10 @@
+<!-- <ng-progress [positionUsing]="'marginLeft'" [minimum]="0.15" [maximum]="1" [speed]="200" [showSpinner]="false" [direction]="'leftToRightIncreased'"
+  [color]="'red'" [trickleSpeed]="250" [thick]="false" [ease]="'linear'"></ng-progress> -->
+<app-ssrs-loader></app-ssrs-loader>
+<app-toast class="show"></app-toast>
+<app-navbar *ngIf="ShowNavs()"></app-navbar>
+<app-sidebar *ngIf="ShowNavs()"></app-sidebar>
+<div class="container-fluid page-content p-3">
+  <router-outlet></router-outlet>
+</div>
+<!-- <simple-notifications [options]="options"></simple-notifications> -->

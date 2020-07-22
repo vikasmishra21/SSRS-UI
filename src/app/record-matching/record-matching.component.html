@@ -1,0 +1,49 @@
+<h3 class="page-name" style="position:relative">
+  <ol class="breadcrumb d-flex">
+    <li class="breadcrumb-item active">RECORD MATCHING</li>
+  </ol>
+
+</h3>
+<div class="col-md-12 d-flex flex-row">
+  <div class="col-md-6 d-flex">
+    <div class="form-group col-md-10 text-center">
+      <input class="choose-file border-radius" type="file" placeholder="Select File" required (change)="SetFile($event)" accept=".txt"
+      />
+    </div>
+  </div>
+  <div class="col-md-4">
+    <select name="matchType" class="form-control" [(ngModel)]="matchType">
+      <option value="1">Incentive</option>
+      <option value="2">Reminder</option>
+      <option value="3">Final Extract</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <button type="button" class="btn btn-success" (click)="Upload()">Upload</button>
+  </div>
+</div>
+<br/>
+<br/>
+
+
+
+<div class="col-md-12 d-flex">
+  <h5 *ngIf="optValue == '1'">DATABASE RECORDS NOT MATCH WITH FILE</h5>
+  <h5 *ngIf="optValue == '2'">FILE RECORDS NOT MATCH WITH DATABASE</h5>
+</div>
+<select name="optVal" class="form-control" style="right: 80px;position: absolute;width:300px;height:29px;z-index:1" [(ngModel)]="optValue">
+  <option [value]='1'>DATABASE RECORDS NOT MATCH WITH FILE</option>
+  <option [value]='2'>FILE RECORDS NOT MATCH WITH DATABASE</option>
+</select>
+<div *ngIf="optValue == '2'">
+  <div class="col-md-12 d-flex">
+    <app-data-table [data]="gridData.data" [settings]="gridData.settings" [columnconfig]="gridData.columnconfig" [(events)]="gridData.events"
+      class="data-table"></app-data-table>
+  </div>
+</div>
+<div *ngIf="optValue == '1'">
+  <div class="col-md-12 d-flex">
+    <app-data-table [data]="gridDataDB.data" [settings]="gridDataDB.settings" [columnconfig]="gridDataDB.columnconfig" [(events)]="gridDataDB.events"
+      class="data-table"></app-data-table>
+  </div>
+</div>

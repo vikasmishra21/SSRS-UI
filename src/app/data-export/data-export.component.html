@@ -1,0 +1,24 @@
+<div class="d-flex flex-row ribbon">
+  <div class="p-2 ribbon-block " routerLink="/compareorder">
+    <i class="fa fa-compress"></i><br /><span>Compare Orders</span>
+  </div>
+  <div class="p-2 ribbon-block ">
+    <i class="fa fa-file-excel-o"></i><br /><span>Data Export</span>
+  </div>
+</div>
+<h3 class="page-name" style="position:relative">
+  <ol class="breadcrumb d-flex">
+    <li class="breadcrumb-item active">DATA EXPORT</li>
+  </ol>
+</h3>
+<div class="col-sm-12 d-flex flex-row p-0">
+  <div style="height:386px;overflow:auto;width:100%;margin-bottom:10px;">
+    <app-data-table [data]="gridData.data" [settings]="gridData.settings" [columnconfig]="gridData.columnconfig"
+      [(events)]="gridData.events" class="data-table"></app-data-table>
+  </div>
+</div>
+<div>
+  <button class="btn btn-primary float-right" (click)="newExport()">New Data Export</button>
+</div>
+
+

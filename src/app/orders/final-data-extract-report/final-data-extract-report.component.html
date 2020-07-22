@@ -1,0 +1,72 @@
+﻿<div class="modal-header modal-header-global">
+  <h4 class="modal-title">Summary Report - Final Data Extract</h4>
+  <i class="fa fa-times" aria-hidden="true" (click)="activeModal.dismiss('Cross click')"></i>
+</div>
+<div class="modal-body">
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td>Order ID</td>
+        <td>{{response.OrderCode}}</td>
+      </tr>
+      <tr>
+        <td>Order Type</td>
+        <td>{{response.OrderType|orderType}}</td>
+      </tr>
+      <tr>
+        <td> Hard Close Date</td>
+        <td>{{response.HardCloseDate |dateLocal}}</td>
+      </tr>
+      <tr>
+        <td> Expected Record Count</td>
+        <td>{{response.ExpectedRecordCount}}</td>
+      </tr>
+      <tr>
+        <td>Sample Record Count</td>
+        <td>{{response.SampleCount}}</td>
+      </tr>
+      <tr>
+        <td>Extract Run On</td>
+        <td>{{response.ExtractRunOn |dateLocal}}</td>
+      </tr>
+      <tr>
+        <td>Extract Run By</td>
+        <td>{{response.ExtractRunBy}}</td>
+      </tr>
+      <tr>
+        <td>Total Records In Extract</td>
+        <td>{{response.RecordsGenerated}}</td>
+      </tr>
+      <tr>
+        <td>Total Completes</td>
+        <td>{{response.TotalCompletes}}</td>
+      </tr>
+      <tr>
+        <td>Total Completes - Paper</td>
+        <td>{{response.TotalCompletesPaper}}</td>
+      </tr>
+      <tr>
+        <td>Total Completes - Phone</td>
+        <td>{{response.TotalCompletesPhone}}</td>
+      </tr>
+      <tr>
+        <td>Full Completes</td>
+        <td>{{response.FullCompletes}}</td>
+      </tr>
+      <tr>
+        <td>Partial Completes</td>
+        <td>{{response.PartialCompletes}}</td>
+      </tr>
+      <tr>
+        <td>Non Completes</td>
+        <td>{{response.NonCompletes}}</td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>
+<div class="modal-footer">
+  <div class="pull-right">
+    <button type="button" class="btn btn-primary" (click)="activeModal.dismiss('Close click')">Close</button>
+  </div>
+</div>

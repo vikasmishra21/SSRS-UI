@@ -1,0 +1,21 @@
+<div class="modal-header modal-header-global">
+  <h4 class="modal-title">Filter Query Builder</h4>
+  <i class="fa fa-times" aria-hidden="true" (click)="activeModal.dismiss('Cross click')"></i>
+</div>
+<div class="modal-body">
+  <div class="col-md-12 alert alert-info">
+    <b>WHERE:</b> {{BuidSqlCondition()}}
+  </div>
+  <hr/>
+  <div class="clearfix"></div>
+  <div class="d-flex flex-row " *ngFor="let group of group.rules;let i=index">
+    <div class="col-md-12 padding-5">
+      <app-query-builder-script [group]="group" [fields]="fields" [parent]="vm" [index]="i"></app-query-builder-script>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-success" (click)="ApplyFilters()">Apply Filters</button>
+  <button type="button" class="btn btn-danger" (click)="activeModal.dismiss('Close click')">Close</button>
+</div>

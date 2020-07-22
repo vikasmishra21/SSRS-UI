@@ -1,0 +1,17 @@
+﻿<div class="navbar navbar-inverse navbar-fixed-left">
+  <ul class="nav navbar-nav">
+    <li title="Home" routerLink="/home" routerLinkActive="active"><a><i class="fa fa-home"></i></a></li>
+    <li title="Orders" appPermission permissionCode="1" routerLink="/orders" routerLinkActive="active"><a><i class="fa fa-file-text-o"></i></a></li>
+    <li title="Po Returns" appPermission permissionCode="3" routerLink="/poreturns" routerLinkActive="active"><a><i class="fa fa-share-square-o"></i></a></li>
+     <li title="Incentives" appPermission permissionCode="4" routerLink="/fullincentives" routerLinkActive="active"><a><i class="fa fa-usd"></i></a></li>
+    <li title="Scorecarding" appPermission permissionCode="5" routerLink="/scorecardingoverview" routerLinkActive="active"><a><i class="fa fa-star"></i></a></li>
+    <li title="User Management" appPermission permissionCode="6" routerLink="/user" routerLinkActive="active"><a><i class="fa fa-users"></i></a></li>
+    <li title="Record Matching" routerLink="/recordmatching" routerLinkActive="active"><a><i class="fa fa-check-square-o"></i></a></li>
+    <li title="Cross Tabs" routerLink="/crosstab" routerLinkActive="active"><a><i class="fa fa-table"></i></a></li>
+    <li title="Phone Survey Link" (click)="OpenPhoneSurvey()"><a><i class="fa fa-link"></i></a></li>
+    <li title="Edit Record Link" (click)="EditRecord()"><a><i class="fa fa-pencil-square-o"></i></a></li>
+    <li title="Tools" routerLink="/compareorder" routerLinkActive="active"><a><i class="fa fa-wrench"></i></a></li>
+    <!-- <li title="Data Export" routerLink="/dataexport" routerLinkActive="active"><a><i class="fa fa-file-excel-o"></i></a></li> -->
+    <!-- <li title="Logs"><a><i class="fa fa-cogs"></i></a></li>  -->
+  </ul>
+</div>

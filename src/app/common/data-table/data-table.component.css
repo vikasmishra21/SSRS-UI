@@ -1,0 +1,40 @@
+.data-table-head {
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.data-table-row {
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+table {
+  border-collapse: inherit;
+}
+
+.table td,
+.table th {
+  padding: .3rem .4rem;
+}
+.table{margin-top: .15rem}
+.data-table-head th {
+  color: #000;
+  font-weight: 500;
+  background-color: #dddede;
+  text-align: center;
+}
+.text-truncate,.table td:first-child >div >div{text-overflow: ellipsis;overflow: hidden;white-space: nowrap;width:90%;}
+
+
+.table-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.td-width {
+  min-width: 120px;
+}
+
+.txt-center {
+  text-align: center;
+}

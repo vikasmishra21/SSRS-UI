@@ -1,0 +1,67 @@
+<h3 class="page-name">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active">INCENTIVE RULES</li>
+  </ol>
+</h3>
+<div class="d-flex">
+  <app-data-table [data]="gridData.data" [columnconfig]="gridData.columnconfig" [(events)]="gridData.events" class="data-table"></app-data-table>
+</div>
+<div class="col-md-12">
+  <h5>Create New Rule</h5>
+  <div class="clearfix"></div>
+  <div class="col-md-12" style="display:inherit;margin:10px 0px;">
+    <div class="row">
+      <label class="control-label col-md-2"> <strong>Choose Order Type</strong> </label>
+      <div class="col-md-2">
+        <select name="orderType" class="form-control col-md-11" (ngModelChange)="ChangeFieldVariables($event)" [(ngModel)]="formData.orderType">
+              <option value="">--select--</option>
+              <option *ngFor="let c of orderType" [value]="c.code">{{c.name}}</option>
+            </select>
+      </div>
+    </div>
+    <br/>
+    <div class="clearfix"></div>
+    <div class="row required">
+      <label class="control-label col-md-1">Rule Name</label>
+      <div class="col-md-2">
+        <input type="text" [(ngModel)]="formData.name" class="form-control col-md-11" id="name" placeholder="Enter Rule Name">
+      </div>
+      <div class="radio col-md-2">
+        <input type="radio" class="form-check-input" (ngModelChange)="ChangeRuleType()" [(ngModel)]="formData.ruleType" name="optionsRadios" id="optionsRadios1" value="1"
+          checked>
+        <label for="optionsRadios1">Set Fixed Value
+      </label>
+      </div>
+      <div class="radio col-md-2">
+        <input type="radio" class="form-check-input" (ngModelChange)="ChangeRuleType()" [(ngModel)]="formData.ruleType" name="optionsRadios" id="optionsRadios2" value="2">
+        <label for="optionsRadios2">Set Conditional Value(s)
+            </label>
+      </div>
+      <div *ngIf="formData.ruleType== '1' then fixed else dynamic"> </div>
+      <ng-template #dynamic>
+        <div class="pull-left col-md-2"><button type="button" (click)="AddGroup()" class="btn btn-primary">Add Condition</button></div>
+      </ng-template>
+      <ng-template #fixed>
+        <div class="pull-left col-md-2"> <input type="text" class="form-control" [(ngModel)]="formData.rule" id="value" placeholder="$"></div>
+      </ng-template>
+      <div class="col-md-3"><button type="button" (click)="Submit()" class="btn btn-primary pull-right">Add Rule</button></div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-incentive">
+      <div class="d-flex flex-row" *ngFor="let group of group.rules;let i=index">
+        <div class="col-md-9 padding-5">
+          <app-query-builder-script conditiondisplay="incentive" [group]="group" [fields]="fields" [parent]="vm" [index]="i"></app-query-builder-script>
+        </div>
+        <div class="flex-column col-md-3" style="margin:10px;">
+          <label class="control-label col-md-6 pull-left">Apply Incentive Of</label>
+          <div class="col-md-6 pull-left"><input type="text" class="form-control" [(ngModel)]="group.amount" id="name" placeholder="$"></div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+</div>
+<div class="clearfix"></div>

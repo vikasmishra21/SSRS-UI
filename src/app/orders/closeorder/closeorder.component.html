@@ -1,0 +1,47 @@
+﻿<h3 class="page-name" style="position:relative">
+  <ol class="breadcrumb d-flex">
+    <li class="breadcrumb-item active">Close Order / Order Code : {{orderCode}}</li>
+  </ol>
+</h3>
+<div class="col-md-6">
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td> Receipted Count</td>
+        <td>{{orderDetails.ReceiptedCount}}</td>
+      </tr>
+      <tr>
+        <td> Finalized Count</td>
+        <td>{{orderDetails.FinalizedCount}}</td>
+      </tr>
+      <tr>
+        <td> Pulled Count</td>
+        <td>{{orderDetails.PulledCount}}</td>
+      </tr>
+
+    </tbody>
+
+  </table>
+</div>
+<div *ngIf="showWarning && NotPulledFinalized != 0" class="alert alert-info" style="width:50%">
+  <span>Warning! There are {{NotPulledFinalized}} records which are not pulled.Are you sure you want to close?</span>
+
+  <i (click)="setShowWarning()" class='fa fa-times pull-right'></i>
+</div>
+<div style="height:5%"></div>
+<div class="alert alert-info" *ngIf="showCount" style="width:70%">
+  <div>
+    <span>Read this before closing the order!</span>
+    <span (click)="setShowCount()" class="pull-right"><i class='fa fa-times'></i></span>
+  </div>
+  <div>
+    Once you will close an order, it will not appearin the orders list by default.Also you will not be able to do any processing
+    on that order,like generating incentivefile or pulling data.You will be able to view historic information about the order
+    though.
+  </div>
+</div>
+<div class="clearfix"></div>
+<div style="height:2%"></div>
+<div class="pull-right">
+  <button type="button" class="btn btn-primary" (click)="CloseOrder()">Close Order</button>
+</div>

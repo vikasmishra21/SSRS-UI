@@ -1,0 +1,226 @@
+﻿<div class="modal-header modal-header-global">
+  <h4 class="modal-title">Manage Roles</h4>
+  <i class="fa fa-times" aria-hidden="true" (click)="activeModal.dismiss('Cross click')"></i>
+</div>
+<div class="modal-body">
+
+  <div class="d-flex flex-row ribbon">
+    <div class="p-2 ribbon-block" (click)="OpenAddNewRole()">
+      <i class="fa fa-user-plus"></i>
+      <br />
+      <span>Create New Role</span>
+    </div>
+    <div class="p-2 ribbon-block" (click)="ManageRole()">
+        <i class="fa fa-user"></i>
+        <br />
+        <span>Manage Role</span>
+      </div>
+  </div>
+  <div *ngIf="!IsNewRole && !IsUpdateRole">
+      <div class="col-md-12 d-flex paddingZero">
+          <app-data-table [data]="gridData.data" [settings]="gridData.settings" [columnconfig]="gridData.columnconfig"
+                          [(events)]="gridData.events" class="data-table"></app-data-table>
+        </div>
+  </div>
+  <div *ngIf="IsNewRole || IsUpdateRole">
+  <div style="margin-top: 10px;">
+    <label for="role">Role Name:</label>
+    <input type="text" style="width: 84.5%; display: inline-block" class="form-control" id="inputbox" name="rolename" [(ngModel)]="Role.Name" placeholder="Role Name"
+    />
+  </div>
+  <ul class="margin-5 padding-5 role-list">
+    <li>
+      <div class="checkbox">
+        <input type="checkbox" name="1" id="1" [(ngModel)]="Checked['1']" (change)="SetMainMenuPermissionID($event.target.value)"
+          [value]="1" />
+        <label for="1">Orders</label>
+      </div>
+      <ul>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['101']" (change)="SetPermissionID($event.target.value)" [value]="101"
+              id="2" />
+            <label for="2">Create Order</label>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['102']" (change)="SetPermissionID($event.target.value)" [value]="102"
+              id="3" />
+            <label for="3">Incentive rules</label>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['103']" (change)="SetPermissionID($event.target.value)" [value]="103"
+              id="4" />
+            <label for="4">Cleaning rules</label>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <div class="checkbox">
+        <input type="checkbox" [(ngModel)]="Checked['2']" (change)="SetMainMenuPermissionID($event.target.value)" [value]="2"
+          id="5" />
+        <label for="5">Order</label>
+      </div>
+      <ul>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['201']" (change)="SetPermissionID($event.target.value)" [value]="201"
+              id="6" />
+            <label for="6">Upload</label>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['202']" (change)="SetPermissionID($event.target.value)" [value]="202"
+              id="7" />
+            <label for="7">View Samples</label>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['203']" (change)="SetPermissionID($event.target.value)" [value]="203"
+              id="8" />
+            <label for="8">Initial Mailer</label>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['204']" (change)="SetPermissionID($event.target.value)" [value]="204"
+              id="9" />
+            <label for="9">Reminder Mailer</label>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['205']" (change)="SetPermissionID($event.target.value)" [value]="205"
+              id="10" />
+            <label for="10">Final Extract</label>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['206']" (change)="SetPermissionID($event.target.value)" [value]="206"
+              id="11" />
+            <label for="11">Scorecarding</label>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['207']" (change)="SetPermissionID($event.target.value)" [value]="207"
+              id="12" />
+            <label for="12">Incentive Report</label>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['208']" (change)="SetPermissionID($event.target.value)" [value]="208"
+              id="13" />
+            <label for="13">Close Order</label>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['209']" (change)="SetPermissionID($event.target.value)" [value]="209"
+              id="14" />
+            <label for="14">Delete Order</label>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <div class="checkbox">
+        <input type="checkbox" [(ngModel)]="Checked['3']" (change)="SetMainMenuPermissionID($event.target.value)" [value]="3"
+          id="15" />
+        <label for="15">PO Returns</label>
+      </div>
+      <ul>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['301']" (change)="SetPermissionID($event.target.value)" [value]="301"
+              id="16" />
+            <label for="16">Scan Returns</label>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['302']" (change)="SetPermissionID($event.target.value)" [value]="302"
+              id="17" />
+            <label for="17">Report Problem</label>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['303']" (change)="SetPermissionID($event.target.value)" [value]="303"
+              id="18" />
+            <label for="18">Daily Report</label>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <div class="checkbox">
+        <input type="checkbox" [(ngModel)]="Checked['4']" (change)="SetMainMenuPermissionID($event.target.value)" [value]="4"
+          id="19" />
+        <label for="19">Incentive</label>
+      </div>
+      <ul>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['401']" (change)="SetPermissionID($event.target.value)" [value]="401"
+              id="20" />
+            <label for="20">Incentive Disbursement</label>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['402']" (change)="SetPermissionID($event.target.value)" [value]="402"
+              id="21" />
+            <label for="21">Disbursement History</label>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <div class="checkbox">
+        <input type="checkbox" [(ngModel)]="Checked['6']" (change)="SetMainMenuPermissionID($event.target.value)" [value]="6"
+          id="22" />
+        <label for="22">User Management</label>
+      </div>
+      <ul>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['601']" (change)="SetPermissionID($event.target.value)" [value]="601"
+              id="23" />
+            <label for="23">Assign User</label>
+          </div>
+        </li>
+        <li>
+          <div class="checkbox">
+            <input type="checkbox" [(ngModel)]="Checked['602']" (change)="SetPermissionID($event.target.value)" [value]="602"
+              id="24" />
+            <label for="24">Manage Roles</label>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <div class="checkbox">
+        <input type="checkbox" [(ngModel)]="Checked['5']" (change)="SetMainMenuPermissionID($event.target.value)" [value]="5"
+          id="25" />
+        <label for="25">Overall Scorecarding</label>
+      </div>
+    </li>
+  </ul>
+</div>
+</div>
+<div class="modal-footer" *ngIf="IsNewRole || IsUpdateRole">
+  <span style="color:red" *ngIf="errorText">{{errorText}}</span>
+  <div class="pull-right">
+    <button type="button" class="btn btn-success" (click)="SaveRole()">Save</button>
+    <button type="button" class="btn btn-danger" (click)="activeModal.dismiss('Close click')">Close</button>
+  </div>
+</div>

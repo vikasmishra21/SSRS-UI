@@ -1,0 +1,39 @@
+<h3 class="page-name" style="position:relative">
+  <ol class="breadcrumb d-flex">
+    <li class="breadcrumb-item active">SCORECARDING / Order Code : {{orderCode}}</li>
+  </ol>
+
+</h3>
+<div class="d-flex flex-column">
+  <app-data-table [data]="gridData.data" [settings]="gridData.settings" [columnconfig]="gridData.columnconfig" [(events)]="gridData.events"
+    class="data-table"></app-data-table>
+  <hr/>
+  <div class="col-lg-12 d-flex flex-row">
+    <div class="col-lg-8">
+      <h6>Quality Trend</h6>
+      <app-chart *ngIf="chart" [chart]="chart"></app-chart>
+    </div>
+    <div class="col-lg-4">
+      <h6>Overall</h6>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">Contact Info</th>
+            <td>{{InfoSummary.ContactInfo}} %</td>
+          </tr>
+          <tr>
+            <th scope="row">Demographics</th>
+            <td>{{InfoSummary.DemoGraphics}} %</td>
+          </tr>
+          <tr>
+            <th scope="row">Others</th>
+            <td>{{InfoSummary.Others}} %</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>Total Scorcarded - {{totalScorded}} of {{totaltodo}}</h2>
+    </div>
+    
+    
+  </div>
+</div>

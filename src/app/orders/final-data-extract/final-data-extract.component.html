@@ -1,0 +1,91 @@
+﻿<h3 class="page-name" style="position:relative">
+  <ol class="breadcrumb d-flex">
+    <li class="breadcrumb-item active">Final Data Extract / Order Code : {{orderCode}}</li>
+  </ol>
+</h3>
+<div class="d-flex">
+  <app-data-table [data]="gridData.data" [settings]="gridData.settings" [columnconfig]="gridData.columnconfig"
+    [(events)]="gridData.events" class="data-table"></app-data-table>
+</div>
+<div class="row  padding-5 margin-5">
+  <div class="col-md-8">
+    <div class="padding-5">
+      <h6>Select the records you want to pull</h6>
+    </div>
+    <div class="radio">
+      <input id="pullFinished" (ngModelChange)="BindRemainingPulledCount($event)" type="radio" name="type" value="1"
+        [(ngModel)]="pulledObject.Type" />
+      <label for="pullFinished"> <strong>Hard Close Pull:</strong> All records (completes and non-completes). Include
+        all records in their current state.</label>
+    </div>
+    <div class="radio">
+      <input id="pullRemaining" (ngModelChange)="BindRemainingPulledCount($event)" type="radio" name="type" value="2"
+        [(ngModel)]="pulledObject.Type" />
+      <label for="pullRemaining"><strong>Late Records pull:</strong> Only records receipted/finalized after the hard
+        close date. Only include completed records.</label>
+
+    </div>
+    <div class="radio">
+      <input id="pullEY" (ngModelChange)="BindRemainingPulledCount($event)" type="radio" name="type" value="3"
+        [(ngModel)]="pulledObject.Type" />
+      <label for="pullEY"><strong>Filtered Pull: </strong> <i (click)="ShowFilterPopup()" class="fa fa-filter"
+          title="Filters"></i></label>
+    </div>
+    <div class="radio">
+      <input id="rePull" (ngModelChange)="BindRemainingPulledCount($event)" type="radio" name="type" value="4"
+        [(ngModel)]="pulledObject.Type" />
+      <label for="rePull"><strong>E&Y Records Only:</strong> Pull any record flagged as an E&Y record</label>
+    </div>
+    <div class="checkbox">
+      <input id="markTest" type="checkbox" value="true" [(ngModel)]="pulledObject.markTest" />
+      <label for="markTest"> <i style="color:red;"> Test Pull-Records will not be marked as pulled.</i> </label>
+    </div>
+  </div>
+  <div class="alert borderFull col-sm-2" style="height:10%">
+    {{pulledRecordsCount}} Records To Pull
+  </div>
+  <div class="col-sm-4 margin-right">
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-7"></div>
+  <div class="col-sm-4">
+    <div class="row" *ngIf="scheduleReminderoption">
+      <div class="col-sm-5">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" [disabled]="false" name="dpfromControl"
+            [(ngModel)]="scheduledDate" ngbDatepicker #fromControl="ngbDatepicker">
+          <button class="input-group-addon" (click)="fromControl.toggle()" type="button">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="input-group">
+          <p *ngIf="scheduleDateFlag" style="color:red">Date is required.</p>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="input-group">
+          <input type="time" [(ngModel)]="scheduledTime" name="schTime">
+        </div>
+        <div class="input-group">
+          <p *ngIf="scheduleTimeFlag" style="color:red">Time is required.</p>
+        </div>
+      </div>
+      <div class="col-sm-5">
+        <button type="button" class="btn btn-primary ml-3" (click)="scheduledPullOrder()">Schedule Pull</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-1">
+    <div class="dropdown">
+      <button class="dropbtn btn btn-primary">Pull</button>
+      <div class="dropdown-content" style="right:0;">
+        <a (click)="PullOrder()">Now</a>
+        <a (click)="scheduleToggle()">Schedule</a>
+      </div>
+    </div>
+  </div>
+
+</div>

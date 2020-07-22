@@ -1,0 +1,73 @@
+﻿<div class="alert-group borderFull alert query-builder">
+  <div class="form-inline d-flex justify-content-between">
+    <select class="form-control input-sm" [(ngModel)]="group.operator">
+      <option *ngFor="let o of operators"  [ngValue]="o.value">{{o.name}}</option>
+    </select>
+    <div>
+      <button style="margin-left: 5px" (click)="addCondition()" class="btn btn-sm btn-success"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+      <!-- <button style="margin-left: 5px" (click)="addGroup()" class="btn btn-sm btn-success"><i class="fa fa-plus-circle" aria-hidden="true"></i></button> -->
+      <button style="margin-left: 5px" *ngIf="index!=0" (click)="removeGroup()" class="btn btn-sm btn-danger"><i class="fa fa-minus-square" aria-hidden="true"></i></button>
+    </div>
+
+  </div>
+  <div class="group-conditions">
+    <div *ngFor="let rule of group.rules;let i=index" class="condition">
+      <div [ngSwitch]="rule.hasOwnProperty('group')">
+        <div *ngSwitchCase="true">
+          <app-query-builder-script [group]="rule.group" [fields]="fields" [parent]="vm" [index]="i"></app-query-builder-script>
+        </div>
+        <div *ngSwitchDefault>
+          <div class="form-inline">
+            <select [(ngModel)]="rule.field" (ngModelChange)="changeConditions($event,rule)" class=" form-control input-sm ">
+              <option value="">--Select Field--</option>
+              <option *ngFor="let f of fields " [ngValue]="f.column">{{f.name}}</option>
+            </select>
+
+            <select *ngIf="rule.type" style="margin-left: 5px " (ngModelChange)="changeControlType($event,rule)" [(ngModel)]="rule.condition"
+              class="form-control input-sm ">
+              <option value="">--Select Condition--</option>
+              <option *ngFor="let c of conditions[rule.type]" [ngValue]="c.value">{{c.name}}</option>
+            </select>
+            <div *ngIf="rule.type && rule.dataControlType" style="margin-left: 5px;">
+              <div [ngSwitch]="rule.dataControlType">
+                <div *ngSwitchCase="1">
+                  <input style="margin-left: 5px " type="text " [(ngModel)]="rule.data " class="form-control input-sm " />
+                </div>
+                <div *ngSwitchCase="2">
+                  <input style="margin-left: 5px " type="number " [(ngModel)]="rule.data " class="form-control input-sm " />
+                </div>
+                <div *ngSwitchCase="3">
+                  <select [(ngModel)]="rule.data" class=" form-control input-sm ">
+                            <option value="">--Select--</option>
+                            <option *ngFor="let o of rule.SelectedField.options" [ngValue]="o.code">{{o.name}}</option>
+                      </select>
+                </div>
+                <div *ngSwitchCase="5">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="rule.data" ngbDatepicker #d="ngbDatepicker">
+                      <button class="input-group-addon" (click)="d.toggle()" type="button">
+                              <i class="fa fa-calendar" aria-hidden="true"></i>
+                          </button>
+                    </div>
+                  </div>
+                </div>
+                <div *ngSwitchCase="4 ">
+
+                </div>
+                <!-- <div *ngSwitchDefault>
+                      <input style="margin-left: 5px " type="text " [(ngModel)]="rule.data " class="form-control input-sm " />
+                    </div> -->
+              </div>
+            </div>
+
+            <!-- <ss-multiselect-dropdown [options]="myOptions " [(ngModel)]="rule.model " (ngModelChange)="multiselectChange($event) "></ss-multiselect-dropdown> -->
+
+            <button style="margin-left: 5px " (click)="removeCondition(i) " class="btn btn-sm btn-danger "><i class="fa
+                fa-minus-square " aria-hidden="true "></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

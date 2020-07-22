@@ -1,0 +1,181 @@
+<div class="d-flex flex-row">
+  <!-- <span class="text-white" style="background-color: #337ab7;">Step 1</span> -->
+  <span class="ml-3 align-center" style="font-size: 1rem;">Export Definitions</span>
+  <input class="form-control ml-2" style="width:15%" type="text" placeholder="Search..." aria-label="SearchDefinition"
+    [(ngModel)]="searchDefinition">
+</div>
+
+<table class="table table-bordered innerTable mb-0 mt-2" style="table-layout: fixed;" id="brandHeader"
+  [style.width.px]="getContentWidth()">
+  <thead style="background-color: #000;color:#fff">
+    <tr>
+      <th style="width: 6%;"></th>
+      <th>NAME</th>
+      <th>DESCRIPTION</th>
+      <th>ORDER TYPE</th>
+      <th>FILE TYPE</th>
+      <th>CREATED BY</th>
+      <th>CREATED ON</th>
+      <th>DELETE</th>
+    </tr>
+  </thead>
+</table>
+<div style="max-height:270px;overflow:auto">
+  <table id="brandData" class="table table-hover table-bordered mb-0" style="table-layout: fixed;">
+    <tbody>
+      <tr *ngFor="let definition of dataExportDefinitions | searchFilter : searchDefinition ; let i = index">
+        <td style="width: 6%;"><input type="radio" name="definition" [value]="definition"
+            (change)="setFieldType('order', definition.OrderType)" [(ngModel)]="selectedDefinition"></td>
+        <td>{{definition.Name}}</td>
+        <td>{{definition.Description}}</td>
+        <td>{{OrderTypeEnum[definition.OrderType]}}</td>
+        <td>{{FileTypeEnum[definition.FileType]}}</td>
+        <td>{{definition.CreatedBy}}</td>
+        <td>{{definition.CreatedOn}}</td>
+        <td>
+          <i title="Delete this Definition" class="fa fa-trash btn" (click)="deleteExportDefinition(definition.ID,i)"
+            style="font-size: medium;color: #dc3545 !important;"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <span *ngIf="isSelectedDefinitionEmpty" class="text-danger mt-2">*Select a Definition </span>
+</div>
+<div class="mt-3 mb-3">
+  <button class="btn btn-primary float-right" (click)="toggleNewDefinition('new')">New Definition</button>
+</div>
+<div *ngIf="newDefinition">
+  <div class="col-sm-12 d-flex flex-row p-0">
+    <div class="col-sm-3">
+      <label>Name</label>
+      <input placeholder="Name of Definition" class="form-control" type="text" [(ngModel)]="definitionName">
+      <p *ngIf="isDefinitionNameEmpty" class="text-danger">*Enter a name for the Definition</p>
+    </div>
+    <div class="col-sm-3">
+      <label>Order Type</label>
+      <select class="form-control" [(ngModel)]="selectedOrderTypeCode">
+        <option *ngFor="let orderType of OrderType; let i=index" [value]="orderType.code" class="OrderTypeOption"
+          style="font-size:.9rem;padding:5px">{{orderType.name}}</option>
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <label>Table Version</label>
+      <select class="form-control" [(ngModel)]="selectedVersionCode">
+        <option *ngFor="let tableVersion of TableVersion; let i=index" [value]="tableVersion.code"
+          class="OrderTypeOption" style="font-size:.9rem;padding:5px">{{tableVersion.name}}</option>
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <label>File Type</label>
+      <select class="form-control" [(ngModel)]="selectedFileTypeCode">
+        <option *ngFor="let fileType of FileType; let i=index" [value]="fileType.code" class="OrderTypeOption"
+          style="font-size:.9rem;padding:5px">{{fileType.name}}</option>
+      </select>
+    </div>
+  </div>
+  <br>
+  <div class="col-sm-12 d-flex flex-row p-0">
+    <div class="col-sm-11">
+      <label>Description</label>
+      <textarea class="form-control w-25" cols="10" rows="4" [(ngModel)]="definitionDescription"></textarea>
+      <p *ngIf="isDefinitionDescriptionEmpty" class="text-danger">*Enter a Description for the Definition</p>
+    </div>
+    <div class="col-sm-1">
+      <i class="fa fa-columns padding-5 border-radius clickable borderFull" style="color: #337ab7;"
+        title="Column Selector" (click)="OpenColumnSelector()"></i>
+      <i class="fa fa-filter  padding-5 border-radius clickable borderFull" tyle="color: #337ab7;"
+        (click)="ShowFilterPopup($event)" title="Filters"></i>
+    </div>
+  </div>
+  <div style="margin-bottom: 24px;">
+    <button class="btn cancel mr-2 float-right" (click)="toggleNewDefinition('cancel')">Cancel</button>
+    <button class="btn btn-primary float-right" (click)="saveExportDefinition()">Save</button>
+  </div>
+</div>
+
+<div *ngIf="!newDefinition" class="d-flex flex-row mb-2" style="margin-top: 40px">
+  <!-- <span class="text-white" style="background-color: #337ab7;">Step 2</span> -->
+  <span class="ml-3 align-center" style="font-size: 1rem;">Select Orders</span>
+  <input style="width: 15%;" placeholder="Search..." class="form-control ml-2" type="text" [(ngModel)]="searchOrder">
+</div>
+<table *ngIf="!newDefinition" class="table table-bordered innerTable mb-0" style="table-layout: fixed;" id="brandHeader"
+  [style.width.px]="getContentWidth()">
+  <thead style="background-color: #000;color:#fff">
+    <tr>
+      <th style="width: 6%;"></th>
+      <th>ORDER CODE</th>
+      <th>OSC TEMPLATE NAME</th>
+      <th>ORDER TYPE</th>
+      <th>SAMPLE COUNT</th>
+      <th>RECEIPTED COUNT</th>
+      <th>FINALIZED COUNT</th>
+      <th>HARD CLOSE DATE</th>
+      <th>CREATED ON</th>
+      <th>CREATED BY</th>
+    </tr>
+  </thead>
+</table>
+<div *ngIf="!newDefinition" style="height:270px;overflow:auto">
+  <table id="brandData" class="table table-hover table-bordered mb-0" style="table-layout: fixed;">
+    <tbody>
+      <tr *ngFor="let data of controlTestOrderArray | searchFilter : searchOrder ; let i = index"
+        class="selected click">
+        <td style="width: 6%;"><input [attr.id]="data.OrderCode" type="checkbox" name="order" [value]="data"
+            (click)="setValue('id', data.OrderCode)"></td>
+        <td ngClass="anchor-text" [title]="data.OrderCode" (click)="openOrder(data)">{{data.OrderCode}}</td>
+        <td>{{data.OSCTemplateName}}</td>
+        <td>{{OrderTypeEnum[data.OrderType]}}</td>
+        <td>{{data.SampleCount}}</td>
+        <td>{{data.ReceiptedCount}}</td>
+        <td>{{data.FinalizedCount}}</td>
+        <td>{{data.HardCloseDate}}</td>
+        <td>{{data.CreatedOn}}</td>
+        <td>{{data.CreatedBy}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<span *ngIf="isOrderListEmpty" class="text-danger mt-2">*Select Order</span>
+<br>
+
+<div *ngIf="!newDefinition" class="row">
+  <div class="col-sm-7"></div>
+  <div class="col-sm-4">
+    <div class="row" *ngIf="scheduleReminderoption">
+      <div class="col-sm-5">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" [disabled]="false" name="dpfromControl"
+            [(ngModel)]="scheduledDate" ngbDatepicker #fromControl="ngbDatepicker">
+          <button class="input-group-addon" (click)="fromControl.toggle()" type="button">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="input-group">
+          <p *ngIf="scheduleDateFlag" style="color:red">Date is required.</p>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="input-group">
+          <input type="time" [(ngModel)]="scheduledTime" name="schTime">
+        </div>
+        <div class="input-group">
+          <p *ngIf="scheduleTimeFlag" style="color:red">Time is required.</p>
+        </div>
+      </div>
+      <div class="col-sm-5">
+        <button type="button" class="btn btn-primary ml-3" (click)="scheduledGenerate()">Ok</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!newDefinition" class="col-sm-1 mb-2">
+    <div class="dropdown">
+      <button class="dropbtn btn btn-primary">Generate</button>
+      <div class="dropdown-content" style="right:0;">
+        <a (click)="Generate()">Now</a>
+        <a (click)="scheduleToggle()">Schedule</a>
+      </div>
+    </div>
+  </div>
+
+</div>

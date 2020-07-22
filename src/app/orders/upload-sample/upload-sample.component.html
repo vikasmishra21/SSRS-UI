@@ -1,0 +1,87 @@
+﻿<div class="modal-header add-new-head">
+  <h6 class="modal-title">Upload Sample</h6>
+  <i class="fa fa-times" aria-hidden="true" (click)="Close()"></i>
+</div>
+<div class="modal-body add-new-body">
+  <form>
+    <div class="form-group row ">
+      <label class="control-label col-sm-5">Order ID:</label>
+      <div class="col-sm-7">
+        <label class="form-control" id="id">{{OrderID}}</label>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="form-group row">
+    <label class="control-label col-sm-5">Expected Record Count:</label>
+    <div class="col-sm-7">
+      <input [disabled]="DisableFlag" type="text" name="recordCount" class="form-control" id="Count" [(ngModel)]="expRecordCount" placeholder="Expected Record Count"
+      />
+    </div>
+    <div class="clearfix"></div>
+  </div>
+    <!--<span style="color:red">{{errorExpCount}}</span>-->
+    <div class="form-group row required">
+      <label class="control-label col-sm-5">Select Sample Type:</label>
+      <div class="col-sm-7">
+        <div  class="radio">
+          <input [disabled]="DisableFlag" type="radio" [(ngModel)]="RecordType" value="1" id="rad1" name="optradio"><label for="rad1">Live Records</label>
+        </div>
+        <div  class="radio">
+          <input [disabled]="DisableFlag" type="radio" [(ngModel)]="RecordType" value="2" id="rad2" name="optradio"><label for="rad2">Seed Records</label>
+        </div>
+        <div class="radio">
+          <input [disabled]="DisableFlag" type="radio" [(ngModel)]="RecordType" value="3" id="rad3" name="optradio"><label for="rad3">E. & Y. Records</label>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="form-group text-center">
+      <input #myInput [disabled]="DisableFlag" class="choose-file border-radius"  type="file" placeholder="Select File" required (change)="SetSampleFile($event)" accept=".txt" />
+    </div>
+    <div class="form-group text-center">
+     <span style="color:red">{{Message}}</span>
+    </div>
+    
+    <!-- <div class="col-md-12">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td class="width-300">Validating File Type</td>
+            <td class="items-center">
+              <i *ngIf="ShowSpinner" class="fa fa-circle-o-notch fa-spin" style="font-size:24px;color:red"></i> {{ValidationResult.ValidatingFileType}}
+            </td>
+          </tr>
+          <tr>
+            <td>Validating Record Count</td>
+            <td class="items-center">
+              <i *ngIf="ShowSpinner" class="fa fa-circle-o-notch fa-spin" style="font-size:24px;color:red"></i> {{ValidationResult.ValidatingRecordCount}}
+            </td>
+          </tr>
+          <tr>
+            <td>Validating iFactor Logic</td>
+            <td class="items-center">
+              <i *ngIf="ShowSpinner" class="fa fa-circle-o-notch fa-spin" style="font-size:24px;color:red"></i> {{ValidationResult.ValidatingIfactor}}
+            </td>
+          </tr>
+          <tr *ngIf="ValidationResult.ValidatingDuplicatePasscodes || ValidationResult.ValidatingPasscode">
+            <td>Validating Password</td>
+            <td class="items-center">
+              <span>Fail</span>
+            </td>
+          </tr>
+          <tr *ngIf="ValidationResult.ValidatingOrderID">
+            <td>Validating OrderID</td>
+            <td class="items-center"> 
+              <span>Fail</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+   
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" [disabled]="ConfirmFlag" class="btn btn-success" (click)="ConfirmUpload()">Save Upload Request</button>
+  <button type="button" class="btn btn-danger" (click)="Close()">Close</button>
+</div>

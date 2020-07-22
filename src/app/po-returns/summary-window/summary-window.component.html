@@ -1,0 +1,50 @@
+<h6>Running Summary</h6>
+<table class="table table-sm table-responsive" style="height:38%">
+  <thead>
+    <tr>
+      <th>OrderCode</th>
+      <th>Password</th>
+      <th>Pre-Incentive</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr [ngClass]="{'green-row' : (summary.status==1),'red-row':(summary.status!=1)}" *ngFor="let summary of RunningSummary">
+      <th scope="row">{{summary.ordercode}}</th>
+      <td>{{summary.password}}</td>
+      <td>{{summary.preincentive|currency:'USD':true}}</td>
+      <td>{{summary.statusText}}</td>
+
+    </tr>
+
+  </tbody>
+</table>
+<hr/>
+<h6>Bin Counts</h6>
+<table class="table table-sm table-responsive table-bordered table-striped binCount"   style="height:38%">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Value</th>
+      <th>Count</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of Bin">
+      <td>
+        <span [innerHtml]="GetImage(row)"></span>
+      </td>
+      <th scope="row">{{row.currency|currency:'USD':true}}</th>
+      <td>{{row.count}}</td>
+      <td>{{row.amount}}</td>
+    </tr>
+  </tbody>
+</table>
+<select  [(ngModel)]="interval"  (ngModelChange)="ChangeInterval($event)" class="form-control col-md-8 form-control-sm">
+  <option value="1000">1 Second</option>
+  <option value="2000">2 Second</option>
+  <option value="3000">3 Second</option>
+  <option value="4000">4 Second</option>
+  <option value="5000">5 Second</option>
+</select>

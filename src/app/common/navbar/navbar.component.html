@@ -1,0 +1,43 @@
+﻿<!-- Production Navbar -->
+<nav *ngIf="!environment.isStaging" class="navbar navbar-fixed-top navbar-toggleable-sm navbar-inverse ssrs-navbar flex-nowrap" >
+  <div class="d-flex">
+    <a class="navbar-brand ssrs-brand-text" href="">
+              <img src="assets/images/logo.png" style="height:35px;margin-right:10px;" class="pull-left"/>
+                      - Household Panel Management
+        </a>
+    <!-- <span class="navbar-text small text-truncate mt-1">Household Panel Management</span> -->
+  </div>
+  <div class="navbar-collapse d-flex  justify-content-end" id="collapsingNavbar">
+    <ul class="navbar-nav ssrs-nav">
+      <li class="nav-item active">
+        <a class="nav-link" >Welcome: {{username}}<span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link pull-left" (click)="ChangePassword()" title="Change Password"><i class="fa fa-lock" style="color:#337ab7"></i></a>
+        <a class="nav-link pull-left" (click)="LogOut()" title="Logout"><i class="fa fa-sign-out"  style="color:#337ab7"></i></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Staging Navbar -->
+<nav *ngIf="environment.isStaging" class="navbar navbar-fixed-top navbar-toggleable-sm navbar-inverse ssrs-navbar flex-nowrap" style="background-color: yellow;">
+  <div class="d-flex">
+    <a class="navbar-brand ssrs-brand-text" href="">
+              <img src="assets/images/logo.png" style="height:35px;margin-right:10px;" class="pull-left"/>
+                      - Household Panel Management <span style="font-size: x-small;">Staging</span>
+        </a>
+    <!-- <span class="navbar-text small text-truncate mt-1">Household Panel Management</span> -->
+  </div>
+  <div class="navbar-collapse d-flex  justify-content-end" id="collapsingNavbar">
+    <ul class="navbar-nav ssrs-nav">
+      <li class="nav-item active">
+        <a class="nav-link" >Welcome: {{username}}<span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link pull-left" (click)="ChangePassword()" title="Change Password"><i class="fa fa-lock" style="color:#337ab7"></i></a>
+        <a class="nav-link pull-left" (click)="LogOut()" title="Logout"><i class="fa fa-sign-out"  style="color:#337ab7"></i></a>
+      </li>
+    </ul>
+  </div>
+</nav>

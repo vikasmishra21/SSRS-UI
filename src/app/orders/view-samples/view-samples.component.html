@@ -1,0 +1,75 @@
+﻿<h3 class="page-name" style="position:relative">
+  <ol class="breadcrumb d-flex">
+    <li class="breadcrumb-item active">View Samples / Order Code : {{orderCode}}</li>
+  </ol>
+  <span>
+    <i (click)="ShowFilterPopup($event)" class="fa fa-filter filter-icon" title="Filters"></i>
+    <i class="fa fa-trash-o" style="right:35px;color:white;position:absolute;top:6px;" (click)="ClearFilter()" title="Remove Filter"></i>
+    <i (click)="OpenReceiptSimulator()" style="right:60px;color:white;position:absolute;top:6px;" class="fa fa-simplybuilt" title="Reciept Simulator"></i>
+
+  </span>
+</h3>
+<div class="col-md-12 d-flex flex-row margin-5">
+  <div class="col-md-2">
+    <div class="radio col-md-2">
+      <input type="radio" class="form-check-input" [(ngModel)]="dataType" (ngModelChange)="GetGridData()" name="optionsRadios"
+        id="optionsRadios1" value="staging" checked>
+      <label for="optionsRadios1">
+        Staging
+      </label>
+    </div>
+    <div class="radio col-md-2">
+      <input type="radio" class="form-check-input" [(ngModel)]="dataType" (ngModelChange)="GetGridData()" name="optionsRadios"
+        id="optionsRadios2" value="final">
+      <label for="optionsRadios2">
+        Finalized
+      </label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group row  ">
+      <label class="control-label col-sm-4">Batch:</label>
+      <div class="col-sm-8">
+        <input type="text" required class="form-control" name="batch" [(ngModel)]="pageLevelFilters.batch" id="batch" placeholder="Batch"
+        />
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group row  ">
+      <label class="control-label col-sm-4">Password:</label>
+      <div class="col-sm-8">
+        <input type="text" required class="form-control" [(ngModel)]="pageLevelFilters.password" name="password" id="passcode" placeholder="Password"
+        />
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group row  ">
+      <label class="control-label col-sm-4">Language:</label>
+      <div class="col-sm-8">
+        <input type="text" required class="form-control" [(ngModel)]="pageLevelFilters.language" name="language" id="language" placeholder="Language"
+        />
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+
+  <div class="col-md-1">
+    <button type="button" class="btn btn-success" (click)="GetGridData()">Get Data</button>
+  </div>
+  <!-- <div class="col-md-1">
+    <button type="button" class="btn btn-primary" (click)="OpenReceiptSimulator()">Receipt Simulator</button>
+  </div> -->
+</div>
+<br />
+<div class="col-md-12 view-sample">
+  <app-data-table [data]="gridData.data" [settings]="gridData.settings" [columnconfig]="gridData.columnconfig" [(events)]="gridData.events"
+    class="data-table"></app-data-table>
+  <div style="position:absolute;top:-20px;right:20px;">
+    <i class="fa fa-columns padding-5 border-radius clickable borderFull" style="color: #337ab7;" title="Column Selector" (click)="OpenColumnSelector()"></i>
+    <i class="fa fa-download padding-5 border-radius borderFull" (click)="DownloadCSV()" title="Download"></i>
+  </div>
+</div>

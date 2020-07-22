@@ -1,0 +1,21 @@
+[0817/123843.278:ERROR:process_info.cc(632)] range at 0x3ec344200000000, size 0xcb fully unreadable
+[0817/123843.278:ERROR:process_info.cc(632)] range at 0x3ec346200000000, size 0xcb fully unreadable
+[0817/123843.278:ERROR:process_info.cc(632)] range at 0x0, size 0xcb fully unreadable
+[0817/123910.938:ERROR:crash_report_database_win.cc(475)] failed to truncate: The requested operation cannot be performed on a file with a user-mapped section open. (0x4C8)
+[0817/124033.386:ERROR:process_reader_win.cc(182)] ResumeThread: The parameter is incorrect. (0x57)
+[0817/124033.386:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0817/124033.386:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0817/124033.890:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0817/124033.890:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0817/124033.890:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0817/124033.890:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0817/124033.890:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0817/124033.890:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0817/124033.890:ERROR:process_reader_win.cc(123)] NtOpenThread: An invalid Client ID was specified.  (0xc000000b)
+[0817/124034.194:ERROR:exception_snapshot_win.cc(87)] thread ID 87440 not found in process
+[0817/124034.194:WARNING:crash_report_exception_handler.cc(62)] ProcessSnapshotWin::Initialize failed
+[0817/124034.194:ERROR:scoped_process_suspend.cc(39)] NtResumeProcess: An attempt was made to access an exiting process.  (0xc000010a)
+[0911/114210.270:ERROR:process_info.cc(632)] range at 0xa6fb342400000000, size 0xd3 fully unreadable
+[0911/114211.996:ERROR:process_info.cc(632)] range at 0xa6fb344400000000, size 0xd3 fully unreadable
+[0911/114211.996:ERROR:process_info.cc(632)] range at 0x0, size 0xd3 fully unreadable
+[1026/140528.632:ERROR:crash_report_database_win.cc(427)] unexpected header

@@ -1,0 +1,15 @@
+.text-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+tbody {
+  display: block;
+  height: 143px;
+  overflow: auto;
+}
+thead,
+tbody tr {
+  display: table;
+  width: 100%;
+}
+

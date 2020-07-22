@@ -1,0 +1,20 @@
+﻿<div class="modal-header modal-header-global">
+  <h4 class="modal-title">Column Selector</h4>
+  <i class="fa fa-times" aria-hidden="true" (click)="activeModal.dismiss('Cross click')"></i>
+</div>
+
+<div class="padding-5"> <input type="text" class="form-control" [(ngModel)]="search" id="search" placeholder="Search..."></div>
+<div class="modal-body" style="overflow-y:scroll;height:450px;">
+ 
+  <div class="checkbox" *ngFor="let response of ResponseHeaders | searchFilter : search">
+    <input id="{{'header'+response.prop}}" type="checkbox" [(ngModel)]="response.checked"
+           name="responseHeaders" [value]="response.prop" />
+    <label for="{{'header'+response.prop}}">{{response.as}}-{{response.prop}}</label>
+  </div>
+</div>
+<div class="modal-footer">
+  <div class="pull-right">
+    <button type="button" class="btn btn-primary" (click)="ClearAll()">Clear All</button>
+    <button type="button" class="btn btn-primary" (click)="SetColumns()">OK</button>
+  </div>
+</div> 

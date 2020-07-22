@@ -1,0 +1,28 @@
+<h3 class="page-name">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active">CLEANING RULES</li>
+  </ol>
+</h3>
+<div class="d-flex"> 
+  <app-data-table [data]="gridData.data" [columnconfig]="gridData.columnconfig" [(events)]="gridData.events" class="data-table"></app-data-table>
+</div>
+<div class="d-flex">
+  <div class="col-md-12">
+    <h5>Create New Rule</h5>
+    <div class="clearfix"></div>
+    <div class="form-group required col-md-4 pull-left">
+      <label class="control-label col-md-4 pull-left">Rule Name</label>
+      <div class="col-md-8 pull-left">
+        <input type="text" [(ngModel)]="formData.name" class="form-control" id="name" placeholder="Enter Rule Name">
+      </div>
+    </div>
+    <div class="form-group required col-md-4 pull-left">
+      <label class="control-label col-md-4 pull-left">File Name</label>
+      <div class="col-md-8 pull-left">
+        <input type="text" class="form-control" [(ngModel)]="formData.fileName" id="name" placeholder="File name (.cs file conatining rules)">
+      </div>     
+    </div>
+    <div class="pull-right"><button type="button" (click)="Submit()" class="btn btn-primary">Add Rule</button></div>
+    <div class="clearfix"></div>
+  </div>
+</div>

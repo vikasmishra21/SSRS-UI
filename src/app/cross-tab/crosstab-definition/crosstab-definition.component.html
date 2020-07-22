@@ -1,0 +1,271 @@
+<div class="d-flex flex-row w-100">
+
+  <div style="width: 70%;">
+
+    <div class="row w-100 ml-2 mt-2" style="min-height:50px;" aria-label="rowContainer"
+      (drop)="onDropRowContainer($event)" (dragover)="allowDrop($event)">
+      <span class="text-middle col-1 font-weight-bold">Rows</span>
+
+      <div class="d-flex flex-row border border-dark w-80 variable-container text-middle ">
+
+        <div class="p-2 variable-container-content">
+          <span *ngFor="let row of selectedRows; let i=index" class="d-flex flex-row p-1 variable">
+            <span [title]="row.DisplayName"
+              class="text-middle text-white p-0 text-truncate ml-2">{{row.DisplayName}}</span>
+            <div class="dropdown">
+              <i class="dropbtn btn fa fa-caret-down" (click)="openDropDown(row,i,'row'); $event.stopPropagation()"></i>
+              <div *ngIf="row.isToggle" class="dropdown-content" style="right:0;">
+                <a (click)="removeSelectedItem('row',i); $event.stopPropagation()">Delete</a>
+                <a (click)="moveVariable('row',i); $event.stopPropagation()">Move to column</a>
+              </div>
+            </div>
+          </span>
+        </div>
+
+        <div style="width: 5%;">
+          <i title="Clear All" class="btn fa fa-trash" (click)="clearSelection('row')"
+            style="font-size: medium; margin-top: 20px;"></i>
+        </div>
+
+      </div>
+
+      <span *ngIf="SelectedRowsEmpty" class="w-100 text-danger p-1" style="margin-left: 70px;">
+        *Select a Row
+      </span>
+
+    </div>
+
+    <div class="row w-100 ml-2 mt-3" style="min-height:50px;" aria-label="columnContainer"
+      (drop)="onDropColumnContainer($event)" (dragover)="allowDrop($event)">
+      <span class="text-middle col-1 font-weight-bold">Columns</span>
+
+      <div class="d-flex flex-row border border-dark w-80 variable-container text-middle">
+
+        <div class="p-2 variable-container-content">
+          <span *ngFor="let column of selectedColumns; let i=index" class="d-flex flex-row p-1 variable">
+            <span [title]="column.DisplayName"
+              class=" text-middle text-white p-0 text-truncate ml-2">{{column.DisplayName}}</span>
+            <!-- <i class="fa fa-times btn" (click)="removeSelectedItem('Column',i)"></i> -->
+            <div class="dropdown">
+              <i class="dropbtn btn fa fa-caret-down"
+                (click)="openDropDown(column,i,'column'); $event.stopPropagation()"></i>
+              <div *ngIf="column.isToggle" class="dropdown-content" style="right:0;">
+                <a (click)="removeSelectedItem('column',i); $event.stopPropagation()">Delete</a>
+                <a (click)="moveVariable('column',i); $event.stopPropagation()">Move to Row</a>
+              </div>
+            </div>
+          </span>
+        </div>
+
+        <div style="width: 5%;">
+          <i title="Clear All" class="btn fa fa-trash" (click)="clearSelection('column')"
+            style="font-size: medium; margin-top: 20px;"></i>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="row w-100 ml-2 mt-4" style="min-height:50px;" aria-label="valueContainer"
+      (drop)="onDropValueContainer($event)" (dragover)="allowDrop($event)">
+      <span class="text-middle col-1 font-weight-bold">Value</span>
+      <div class="d-flex flex-row border border-dark w-80 variable-container text-middle">
+
+        <div class="p-2 variable-container-content">
+          <span *ngFor="let value of selectedValues; let i=index" class="d-flex flex-row p-1 variable"
+            style="background-color: #17a2b8!important;max-width: fit-content;">
+            <span [title]="value.DisplayName"
+              class="=text-middle text-white p-0 text-truncate ml-2">{{value.DisplayName}}
+              <span *ngIf="value.selectedMeasure.length" class="font-weight-bold">{{value.selectedMeasure}}</span>
+            </span>
+            <div class="dropdown">
+              <i class="dropbtn btn fa fa-caret-down"
+                (click)="openDropDown(value,i,'value'); $event.stopPropagation()"></i>
+              <div *ngIf="value.isToggle" class="dropdown-content" style="right:0;">
+                <a (click)="selectMeasure(Measure['Count'])">Count</a>
+                <a *ngIf="value.isNumeric" (click)="selectMeasure(Measure['Mean'])">Mean</a>
+                <a (click)="selectMeasure(Measure['Percentage'])">Percentage</a>
+                <a *ngIf="value.isNumeric" (click)="selectMeasure(Measure['Sum'])">Sum</a>
+              </div>
+            </div>
+          </span>
+        </div>
+
+        <div style="width: 5%;">
+          <i title="Clear All" class="btn fa fa-trash" (click)="clearSelection('value')"
+            style="font-size: medium; margin-top: 20px;"></i>
+        </div>
+
+      </div>
+
+      <span *ngIf="selectedValueError" class="w-100 text-danger p-1" style="margin-left: 70px;">*You can only select
+        upto one Value</span>
+
+      <span *ngIf="selectedValueEmpty" class="w-100 text-danger p-1" style="margin-left: 70px;">
+        *Select a value
+      </span>
+
+      <span *ngIf="!selectedValueEmpty && selectedMeasureEmpty" class="w-100 text-danger p-1"
+        style="margin-left: 70px;">
+        *Select a Measure
+      </span>
+
+    </div>
+
+    <!-- <span class="d-flex flex-row w-100" style="margin-left:4.2rem; margin-top: 32px;">
+      <span class="col-1">
+        <i class="fa fa-filter" (click)="ShowFilterPopup($event)"
+          style="color: #337ab7;cursor: pointer;border: 1px solid rgba(0, 0, 0, 0.15);padding: 5px;border-radius: 2px;"
+          title="Filters">
+        </i>
+      </span>
+
+      <span class="col-11 ">
+        <i style="margin-left: 35.5rem;" class="fa fa-download" title="Download"></i>
+      </span>
+
+    </span> -->
+
+    <div class="mt-4 w-80" style="margin-left:5rem;">
+      <i *ngIf="showCrosstabTable" style="position: absolute; left: 775px;" class="fa fa-download pull-right"
+        title="Download CSV" (click)="downloadGridData()"></i>
+      <app-data-table *ngIf="showCrosstabTable" [data]="gridData.data" [settings]="gridData.settings"
+        [columnconfig]="gridData.columnconfig" class="data-table"></app-data-table>
+    </div>
+
+
+  </div>
+
+  <div class="right-panel">
+    <div aria-label="segment-1">
+      <div class="page-name" style="position:relative">
+        <ol class="breadcrumb d-flex">
+          <!-- <span class="w-25 bg-secondary">Step 1</span> -->
+          <li class="breadcrumb-item active text-center">SAVE CROSSTAB</li>
+        </ol>
+      </div>
+      <div class="d-flex flex-row w-100 mb-2">
+        <span class="text-secondary text-middle col-3 pl-0">Name</span>
+        <span class="col-9"><input class="form-control" type="text" placeholder="Name of Definition"
+            aria-label="DefinitionName" [(ngModel)]="definitionName"></span>
+      </div>
+
+      <span *ngIf="definitionNameEmpty" class="text-danger mt-1">
+        *Enter a name for the Definition
+      </span>
+
+      <span id="responseMessage" *ngIf="responseMessage.length"
+        [ngClass]="{'mt-1':true, 'text-success':response, 'text-danger':error}">
+        {{responseMessage}}
+      </span>
+
+      <div class="d-flex flex-row justify-content-end mt-2">
+        <span class="btn btn-primary" title="Save Definition" (click)="saveCrosstab()">Save</span>
+      </div>
+
+    </div>
+
+    <div class="mt-2" aria-label="segment-2">
+      <div class="page-name" style="position:relative">
+        <ol class="breadcrumb d-flex">
+          <span class="w-25 bg-secondary">Step 1</span>
+          <li class="breadcrumb-item active text-center">SELECT DATA SOURCE</li>
+        </ol>
+      </div>
+
+      <div class="row w-100">
+        <span class="text-secondary col-4 text-middle">Order Type</span>
+        <select name="orderType" class="col-8 form-control form-control-sm" [(ngModel)]="selectedOrderType"
+          (change)="getFilteredOrders(selectedOrderType); getOrderVariables(selectedOrderType)">
+          <option [value]="OrderType.PPM">PPM</option>
+          <option [value]="OrderType.Diary">Diary</option>
+          <option [value]="OrderType.PR">PR</option>
+        </select>
+      </div>
+
+      <div class="row w-100 mt-2">
+        <span class="text-secondary col-4 text-middle">Table Version</span>
+        <select name="orderType" class="col-8 form-control form-control-sm" [(ngModel)]="selectedTableVersion">
+          <option [value]="TableVersion.Staging">Staging</option>
+          <option [value]="TableVersion.Finalized">Finalized</option>
+        </select>
+      </div>
+
+      <div class="d-flex flex-row w-100 mt-2">
+        <span class="col-3 text-secondary pl-0" style="margin-top: auto;margin-bottom: auto;">Filter</span>
+        <span style="margin-left:16px;">
+          <i class="fa fa-filter" (click)="ShowFilterPopup($event)"
+            style="color: #337ab7;cursor: pointer;border: 1px solid rgba(0, 0, 0, 0.15);padding: 5px;border-radius: 2px;"
+            title="Filters">
+          </i>
+        </span>
+      </div>
+
+      <div class="d-flex flex-row w-100 mt-3">
+        <span class="text-secondary text-middle col-3 pl-0">Orders</span>
+        <span class="col-9"><input class="form-control" type="text" placeholder="Search..." aria-label="SearchOrder"
+            [(ngModel)]="searchOrder"></span>
+      </div>
+
+      <table class="table table-bordered table-hover w-100  mt-2 mb-0">
+        <thead class="thead-light">
+          <tr>
+            <th style="width: 9.7%;"></th>
+            <th style="width: 18.5%;">ORDER CODE</th>
+            <th >OSC TEMPLATE NAME</th>
+            <th>ORDER TYPE</th>
+          </tr>
+        </thead>
+      </table>
+      <table class="table table-bordered table-hover w-100 mt-0">
+        <tbody>
+          <tr *ngFor="let order of filteredOrders | searchFilter : searchOrder">
+            <td style="width: 10%;">
+              <input type="radio" name="order" [value]="order" [(ngModel)]="selectedOrder"
+                (change)="clearError('order')">
+            </td>
+            <td style="width: 19%;" [title]="order.OrderCode">
+              {{order.OrderCode}}</td>
+            <td style="width: 45%;">{{order.OSCTemplateName}}</td>
+            <td>{{OrderType[order.OrderType]}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <span *ngIf="selectedOrderEmpty" class="text-danger">
+      *Select an Order
+    </span>
+
+    <div class="mt-2" aria-label="segment-3">
+      <div class="page-name" style="position:relative">
+        <ol class="breadcrumb d-flex">
+          <span class="w-25 bg-secondary">Step 2</span>
+          <li class="breadcrumb-item active text-center">SELECT VARIABLES</li>
+        </ol>
+      </div>
+
+      <div class="d-flex flex-row w-100 mt-3">
+        <span class="text-secondary text-middle col-3 pl-0">Variables</span>
+        <span class="col-9"><input class="form-control" type="text" placeholder="Search..." aria-label="SearchVariable"
+            [(ngModel)]="searchVariable"></span>
+      </div>
+
+      <table class="table table-bordered table-hover w-100 mt-2">
+        <tbody style="height: 222px!important;">
+          <tr *ngFor="let variable of orderVariables | searchFilter : searchVariable" style="cursor: pointer;"
+            draggable="true" (dragstart)="onDrag($event,variable)">
+            <td>{{variable.DisplayName}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="d-flex flex-row justify-content-end mt-2 mb-2">
+        <span (click)="runCrosstab()" class="btn btn-primary" title="Save Definition">Run Crosstab</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

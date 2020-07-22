@@ -1,0 +1,34 @@
+<h3 class="page-name" style="position:relative">
+  <ol class="breadcrumb d-flex">
+    <li class="breadcrumb-item active">PO RETURNS DAILY REPORT</li>
+  </ol>
+  <span>
+    <i class="fa fa-file-pdf-o ele-click" style="right:35px;color:white;position:absolute;top:6px;" (click)="DownloadPDF()" title="Download PDF"></i>
+  </span>
+</h3>
+<div class="p-2 d-flex flex-column col-lg-12">
+  <div class="p-1 col-lg-4">
+    <div class="form-group">
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd" name="dpfrom" (ngModelChange)="BindGrids($event)" [(ngModel)]="DateFilter"
+          ngbDatepicker #from="ngbDatepicker">
+        <button class="input-group-addon" (click)="from.toggle()" type="button">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- <button class="input-group-addon" (click)="DownloadPDF()" type="button">
+    <i class="fa fa-pdf" aria-hidden="true"></i>
+  </button> -->
+  <div class="d-flex p-1">
+    <app-data-table [data]="gridData.data" [settings]="gridData.settings" [columnconfig]="gridData.columnconfig" [(events)]="gridData.events"
+      class="data-table"></app-data-table>
+  </div>
+  <h6>Problem Returns</h6>
+
+  <div class="d-flex p-1">
+    <app-data-table [data]="gridDataReturns.data" [settings]="gridDataReturns.settings" [columnconfig]="gridDataReturns.columnconfig"
+      [(events)]="gridDataReturns.events" class="data-table"></app-data-table>
+  </div>
+</div>

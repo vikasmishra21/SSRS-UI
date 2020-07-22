@@ -1,0 +1,31 @@
+<h3 class="page-name" style="position:relative">
+  <ol class="breadcrumb d-flex">
+    <li class="breadcrumb-item active">Sample Upload / Order Code : {{orderCode}}</li>
+  </ol>
+</h3>
+
+<div class="col-md-12 d-flex flex-column margin-5">
+
+  <div class="p-2 flex-row">
+    <div class="col-md-8">
+      <div class="form-group row">
+        <div class="col-sm-12 d-flex flex-row">
+          <input type="number" required class="form-control col-md-6 d-flex" name="dummydataCount" [(ngModel)]="dummyDataCount" id="dummydataCount"
+            placeholder="Enter count for dummy data" />
+          <div class="col-md-6 d-flex">
+            <button type="button" class="btn btn-success " (click)="GenerateDummyData()">Generate Dummy Data</button>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <div class="col-md-4 justify-content-end">
+      <button type="button" class="btn btn-success" (click)="OpenUploadSampleModal()">Upload New File</button>
+    </div>
+  </div>
+  <div class="p-2">
+    <app-data-table [data]="gridData.data" [settings]="gridData.settings" [columnconfig]="gridData.columnconfig" [(events)]="gridData.events"
+      class="data-table"></app-data-table>
+  </div>
+
+</div>

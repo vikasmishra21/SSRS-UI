@@ -1,0 +1,21 @@
+<h3 class="page-name" style="position:relative">
+  <ol class="breadcrumb d-flex">
+    <li class="breadcrumb-item active">Initial Mailer / Order Code : {{orderCode}}</li>
+  </ol>
+
+</h3>
+<div class="d-flex flex-column">
+  <div class="form-inline p-4">
+    <label class="sr-only" for="OrderID">OrderID</label>
+    <input type="text" [(ngModel)]="enteredOrder" class="form-control mb-2 mr-sm-2 mb-sm-0" id="OrderID" placeholder="Order ID">
+    <button type="submit" (click)="Delete()" class="btn btn-danger">Delete</button>
+  </div>
+  <div class="p-4">
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading"> Note:</h4>
+      <p>This will Erease all the Data Related to Order {{orderCode}} from System.</p>
+      <p>Once an Order is Deleted you can't Revert it.</p>
+    </div>
+  </div>
+
+</div>

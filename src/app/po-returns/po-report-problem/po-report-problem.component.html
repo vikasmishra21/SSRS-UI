@@ -1,0 +1,103 @@
+﻿<h3 class="page-name" style="position:relative">
+  <ol class="breadcrumb d-flex">
+    <li class="breadcrumb-item active">REPORT PROBLEM WITH PO RETURN</li>
+  </ol>
+</h3>
+<div class="d-flex flex-row">
+  <div class="p-2 d-flex flex-column col-lg-6">
+    <div class="form-group row">
+      <label for="inputQr" class="col-sm-4 col-form-label">QR Code</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" (ngModelChange)="BarCodeChanged($event)" appEleFocus [(ngModel)]="barcode"
+          id="inputQr" placeholder="Q.R. Code">
+      </div>
+    </div>
+    <div class="form-group row"> 
+      <label for="mailingIndicator" class="col-sm-4 col-form-label">Mailing Indicator</label>
+      <div class="col-sm-6">
+        <select [(ngModel)]="PoReturnProblem.BarCodeInfo.MailingIndicator" class="form-control form-control-sm">
+          <option value="A">Initial Mail</option>
+          <option value="X">Reminder One Mail</option>
+          <option value="Z">Reminder Two Mail</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="orderid" class="col-sm-4 col-form-label">Order ID </label>
+      <div class="col-sm-6">
+        <input type="text" [(ngModel)]="PoReturnProblem.BarCodeInfo.OrderCode" class="form-control" id="orderid" placeholder="">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="passcode" class="col-sm-4 col-form-label">Password</label>
+      <div class="col-sm-6">
+        <input type="text" [(ngModel)]="PoReturnProblem.BarCodeInfo.Password" (keyup.enter)="ManualEntry()" class="form-control" id="passcode" placeholder="">
+      </div>
+      <small class="form-text text-muted"> If entered manually Press Enter After filling Password</small>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-4">Type Of Problem : </div>
+      <div class="col-sm-6">
+        <select [(ngModel)]="PoReturnProblem.ProblemType" (ngModelChange)="ChangeProblemType($event)" id="problmType" class="form-control form-control-sm">
+          <option value="">--Select Problem Type--</option>
+          <option *ngFor="let option of problemTypeList" [value]="option.id">{{option.text}}</option>
+        </select>
+        <!-- <div class="form-check">
+          <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="problemType" [(ngModel)]="PoReturnProblem.ProblemType" id="gridRadios1" [value]="1" checked>
+                      Less Money than Expected
+                    </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="problemType" [(ngModel)]="PoReturnProblem.ProblemType" id="gridRadios2" [value]="2">
+                      More Money than Expected
+                    </label>
+        </div>
+        <div class="form-check disabled">
+          <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="problemType" [(ngModel)]="PoReturnProblem.ProblemType" id="gridRadios3" [value]="3">
+                      Other Problem
+                    </label>
+        </div> -->
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4">
+        Expected Money in Envelope:
+      </div>
+      <div class="col-sm-6">
+        <h4>
+          <span class="badge badge-pill badge-warning">{{PoReturnProblem.ExpectedMoney|currency:'USD':true}}</span>
+        </h4>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4">
+        Actual Money in Envelope:
+      </div>
+      <div class="col-sm-6">
+       <input type="number" [(ngModel)]="PoReturnProblem.ActualMoney" onKeyUp="if(this.value>11){this.value='10';}else if(this.value<0){this.value='0';}" min="0" max="10" step=".01" class="form-control" id="mr"
+          placeholder="Enter Returned Money here">
+      </div>
+    </div>
+  </div>
+  <div class="p-2 d-flex flex-column col-lg-6">
+
+    <div class="form-group row">
+      <label for="exampleTextarea">Notes(Mandatory if "Other Problem" is selected):</label>
+      <textarea class="form-control" [(ngModel)]="PoReturnProblem.Notes" id="textarea" rows="3"></textarea>
+    </div>
+
+    <!-- <div class="form-group row">
+      <label for="exampleTextarea">Assign Problem TO:</label>
+      <select [(ngModel)]="PoReturnProblem.AssignedTo" class="form-control" id="selectAssignto">
+        <option value="admin">Admin</option>
+      </select>
+    </div> -->
+    <div class="form-group row">
+      <button (click)="Submit()" [disabled]="!barcode" type="submit" class="btn btn-success login-btn">Submit Problem</button>
+    </div>
+  </div>
+</div>

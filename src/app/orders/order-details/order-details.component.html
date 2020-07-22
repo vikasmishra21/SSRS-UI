@@ -1,0 +1,259 @@
+﻿<h3 class="page-name" style="position:relative">
+  <ol class="breadcrumb d-flex">
+    <li class="breadcrumb-item active">ORDER DETAILS / Order Code : {{orderCode}}</li>
+  </ol>
+</h3>
+<div class="marginTB">
+  <div class="pull-left col-md-5">
+    <div class="col-md-12 col">
+      <h6 class="pull-left">Order Details</h6>
+      <i *ngIf="!ClosedOrder" class="fa fa-pencil-square pull-right text-color-blue clickable borderFull padding-5 border-radius" title="Edit Order Details" (click)="OpenAddNewOrderModal()"></i>
+      
+      <table class="table order-detail">
+        <tbody>
+          <tr>
+            <td>Order Code</td>
+            <td>{{Order.OrderCode}}</td>
+          </tr>
+          <tr>
+            <td>Order Type</td>
+            <td>{{Order.OrderType | orderType }}</td>
+          </tr>
+          <tr>
+            <td>Hard Close Date</td>
+            <td>{{Order.HardCloseDate | dateLocal }}</td>
+          </tr>
+          <tr>
+            <td>OSC Template Name</td>
+            <td>{{Order.OSCTemplateName}}</td>
+          </tr>
+          <tr>
+            <td>Sample Record Count</td>
+            <td>{{Order.SampleCount}}</td>
+          </tr>
+          <tr>
+            <td>
+              Pre Incentive Rule Initial Mail
+              <div *ngIf="preIncentiveInitial" class="alert alert-info alert-dismissible fade show" role="alert">
+                <button type="button" class="close" (click)="preIncentiveInitial = !preIncentiveInitial" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                {{IncentiveDetails.preruleIncentiveInitial.Rule}}
+              </div>
+            </td>
+            <td>
+              {{IncentiveDetails.preruleIncentiveInitial.Name}}
+              <i class="fa fa-info-circle pull-right clickable text-color-blue" title="Click to see Rule" (click)="preIncentiveInitial = !preIncentiveInitial"></i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Post Incentive Rule Initial Mail
+              <div *ngIf="postIncentiveInitial" class="alert alert-info alert-dismissible fade show" role="alert">
+                <button type="button" class="close" (click)="postIncentiveInitial = !postIncentiveInitial" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                {{IncentiveDetails.postruleIncentiveInitial.Rule}}
+              </div>
+            </td>
+            <td>
+              {{IncentiveDetails.postruleIncentiveInitial.Name}}
+              <i class="fa fa-info-circle pull-right clickable text-color-blue" title="Click to see Rule" (click)="postIncentiveInitial = !postIncentiveInitial"></i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Pre Incentive Rule Reminder1
+              <div *ngIf="preruleIncentiveRem1" class="alert alert-info alert-dismissible fade show" role="alert">
+                <button type="button" class="close" (click)="preruleIncentiveRem1 = !preruleIncentiveRem1" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                {{IncentiveDetails.preruleIncentiveRem1.Rule}}
+              </div>
+            </td>
+            <td>
+              {{IncentiveDetails.preruleIncentiveRem1.Name}}
+              <i class="fa fa-info-circle pull-right clickable text-color-blue" title="Click to see Rule" (click)="preruleIncentiveRem1 = !preruleIncentiveRem1"></i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Post Incentive Rule Reminder1
+              <div *ngIf="postruleIncentiveRem1" class="alert alert-info alert-dismissible fade show" role="alert">
+                <button type="button" class="close" (click)="postruleIncentiveRem1 = !postruleIncentiveRem1" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                {{IncentiveDetails.postruleIncentiveRem1.Rule}}
+              </div>
+            </td>
+            <td>
+              {{IncentiveDetails.postruleIncentiveRem1.Name}}
+              <i class="fa fa-info-circle pull-right clickable text-color-blue" title="Click to see Rule" (click)="postruleIncentiveRem1 = !postruleIncentiveRem1"></i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Pre Incentive Rule Reminder2
+              <div *ngIf="preruleIncentiveRem2" class="alert alert-info alert-dismissible fade show" role="alert">
+                <button type="button" class="close" (click)="preruleIncentiveRem2 = !preruleIncentiveRem2" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                {{IncentiveDetails.preruleIncentiveRem2.Rule}}
+              </div>
+            </td>
+            <td>
+              {{IncentiveDetails.preruleIncentiveRem2.Name}}
+              <i class="fa fa-info-circle pull-right clickable text-color-blue" title="Click to see Rule" (click)="preruleIncentiveRem2 = !preruleIncentiveRem2"></i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Post Incentive Rule Reminder2
+              <div *ngIf="postruleIncentiveRem2" class="alert alert-info alert-dismissible fade show" role="alert">
+                <button type="button" class="close" (click)="postruleIncentiveRem2 = !postruleIncentiveRem2" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                {{IncentiveDetails.postruleIncentiveRem2.Rule}}
+              </div>
+            </td>
+            <td>
+              {{IncentiveDetails.postruleIncentiveRem2.Name}}
+              <i class="fa fa-info-circle pull-right clickable text-color-blue" title="Click to see Rule" (click)="postruleIncentiveRem2 = !postruleIncentiveRem2"></i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Cleaning Rule
+              <div *ngIf="cleaningRule" class="alert alert-info alert-dismissible fade show" role="alert">
+                <button type="button" class="close" (click)="cleaningRule = !cleaningRule" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                {{IncentiveDetails.cleaningRule.Rule}}
+              </div>
+            </td>
+            <td>
+              {{IncentiveDetails.cleaningRule.Name}}
+              <i class="fa fa-info-circle pull-right clickable text-color-blue" title="Click to see Rule" (click)="cleaningRule = !cleaningRule"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="pull-left col-md-7 paddingZero">
+    <div class="col-md-12 d-flex flex-row paddingZero" style="margin-top: inherit;">
+      <div class="col-md-8 d-flex flex-row">
+        <div class="col"> <label>From:</label></div>
+        <div class="col-md-5">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" (ngModelChange)="DisableShowAllData();GetOrderDetails($event,'from');" [disabled]="false" name="dpfrom"
+                     [(ngModel)]="DateFilterFrom" ngbDatepicker #from="ngbDatepicker">
+              <button class="input-group-addon" (click)="from.toggle()" type="button">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col"> <label>To:</label></div>
+        <div class="col-md-5">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" (ngModelChange)="DisableShowAllData();GetOrderDetails($event,'to');" placeholder="yyyy-mm-dd" [disabled]="false" name="dpto" [(ngModel)]="DateFilterTo"
+                     ngbDatepicker #to="ngbDatepicker" [minDate] ="minDate">
+              <button class="input-group-addon" (click)="to.toggle()" type="button">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="checkbox">
+          <input id="ViewAllData" class="form-check-input" type="checkbox" [(ngModel)]="View.ViewAllData" (change)="GetOrderDetails($event,'view')">
+          <label for="ViewAllData">
+            Show All Data
+          </label>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <div class="col-md-12 row">
+      <div class="col-md-6 col">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td>Records Receipted OSC</td>
+              <td>{{OrderDetails.RecordsReceiptedOSC}}</td>
+            </tr>
+            <tr>
+              <td>Records Finalized OSC</td>
+              <td>{{OrderDetails.RecordsFinalizedOSC}}</td>
+            </tr>
+            <tr>
+              <td>Phone Completes</td>
+              <td>{{OrderDetails.PhoneCompletes}}</td>
+            </tr>
+            <tr>
+              <td>Total Incentives Disbursed</td>
+              <td>{{OrderDetails.TotalIncentiveDisbursed}}</td>
+            </tr>
+            <tr>
+              <td>Total Records Pulled</td>
+              <td>{{OrderDetails.TotalRecordsPulled}}</td>
+            </tr>
+            <tr>
+              <td>Contact Info Accuracy %</td>
+              <td>{{OrderDetails.ContactInfoAccuracy}}</td>
+            </tr>
+            <tr>
+              <td>Demographics Accuracy %</td>
+              <td>{{OrderDetails.DemographicsAccuracy}}</td>
+            </tr>
+            <tr>
+              <td>Other Info Accuracy %</td>
+              <td>{{OrderDetails.OtherInfoAccuracy}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6 col">
+        <div class="pos-rel borderFull border-radius padding-5">
+          <h5>Response Rate <i class="fa fa-download pull-right" title="Download Report"></i></h5>
+          <div *ngIf="chartUpdate" class="panel-body" style="text-align: center">
+            <app-chart *ngIf="chart" [chart]="chart"></app-chart>
+            <!--<div>Response Rate : {{OrderDetails.ResponseRate}}</div>-->
+          </div>
+
+          <!--  <button type="button" class="btn btn-primary" style="position:absolute;right:10px;top:0px">Download Report</button> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 row">
+      <div class="col-md-6 col">
+        <h6 class="pull-left">Count of PO Returns</h6>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td>Initial PO Return Count</td>
+              <td>{{OrderDetails.Initial_PO_Return_Count}}</td>
+            </tr>
+            <tr>
+              <td>Reminder1 PO Return Count</td>
+              <td>{{OrderDetails.Reminder1_PO_Return_Count}}</td>
+            </tr>
+            <tr>
+              <td>Reminder2 PO Return Count</td>
+              <td>{{OrderDetails.Reminder2_PO_Return_Count}}</td>
+            </tr>          
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+
+  </div>
+
+
+</div>

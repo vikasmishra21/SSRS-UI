@@ -1,0 +1,13 @@
+<h3 class="page-name" style="position:relative">
+  <ol class="breadcrumb d-flex">
+    <li class="breadcrumb-item active">PENDING SCORECARDING</li>
+  </ol>
+
+</h3>
+<div>
+  Scorecards are pending for the following orders.Click to start
+</div>
+<div class="col-md-4 d-flex">
+  <app-data-table [data]="gridData.data" [settings]="gridData.settings" [columnconfig]="gridData.columnconfig"
+    [(events)]="gridData.events" class="data-table"></app-data-table>
+</div>

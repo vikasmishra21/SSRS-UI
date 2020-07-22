@@ -1,0 +1,20 @@
+.condition {
+  margin-top: 5px;
+}
+
+.alert {
+  padding: .3rem 0.2rem;
+  margin-bottom: 0rem;
+}
+
+.form-control {
+  border-radius: 0rem;
+  height: 30px!important;
+}
+
+.query-builder .btn-success{color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;box-shadow:0px 0px}
+.query-builder .btn-danger{color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;box-shadow:0px 0px}

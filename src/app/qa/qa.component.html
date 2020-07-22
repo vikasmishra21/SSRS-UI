@@ -1,0 +1,69 @@
+<div class="qa-container p-2 d-flex flex-row">
+  <div class="col-lg-7 d-flex flex-column">
+    <div class="p-1" style="height: 50px;">
+      <h3 class="page-name" style="position:relative">
+        <ol class="breadcrumb d-flex">
+          <li class="breadcrumb-item active">QA Sample / Order Code : {{orderCode}}</li>
+        </ol>
+        <div class="btn-group" ngbRadioGroup name="radioBasic" (ngModelChange)="toggleImage($event)" [ngModel]="image">
+          <label ngbButtonLabel class="btn-success">
+            <input ngbButton type="radio" [value]="1"> Front
+          </label>
+          <label ngbButtonLabel class="btn-danger">
+            <input ngbButton type="radio" [value]="2"> Back
+          </label>
+
+        </div>
+      </h3>
+    </div>
+    <div class="p-1" style="height:90%;overflow: auto;">
+      <div *ngIf="!imgsrc" style="    text-align: center;" class="alert alert-info" role="alert">
+        No Image Found.
+      </div>
+      <img *ngIf="imgsrc" style="width: 100%;" [attr.src]="imgsrc">
+    </div>
+
+  </div>
+  <div class="col-lg-5">
+    <div class="p-1" style="height: 50px;">
+      <button type="button" (click)="Submit()" class="btn btn-success pull-right">Submit</button>
+      <div class="pull-left" style="padding-top: 8px;"><span style="font-weight: bold"> Password</span> : {{password}}</div>
+    </div>
+    <div class="p-1" style="height:90%;overflow-y: auto">
+      <table class="table  table-striped">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Variable Name</th>
+            <th>Value</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of SampleResponses">
+            <td class="p-2">
+              <strong>{{row.question}}</strong>
+            </td>
+            <td class="p-2 alert-warning">
+              <span>{{row.answer}}</span>
+            </td>
+            <td class="p-1 d-flex flex-row txt-right">
+              <div class="radio col-md-6 p-1">
+                <input type="radio" class="form-check-input" [(ngModel)]="row.result" name="{{row.question}}" id="{{row.question+'-yes'}}"
+                  value="true" checked>
+                <label for="{{row.question+'-yes'}}">Yes
+                </label>
+              </div>
+              <div class="radio col-md-6 p-1">
+                <input type="radio" class="form-check-input" [(ngModel)]="row.result" name="{{row.question}}" id="{{row.question+'-no'}}"
+                  value="false">
+                <label for="{{row.question+'-no'}}">No
+                </label>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

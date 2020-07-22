@@ -1,0 +1,35 @@
+﻿.add-new-body {
+  height: 470px;
+  overflow-y: auto;
+}
+
+.add-new-head {
+  padding: 5px 15px 5px 15px;
+  background-color: #337ab7;
+  color: #fff;
+}
+
+.add-new-head h4 {
+  font-size: 1rem;
+}
+
+.add-new-head i {
+  color: #fff
+}
+
+.form-group {
+  margin-bottom: .6rem;
+}
+
+.form-control {
+  line-height: .5;
+}
+form{
+  font-size: .8rem;
+}
+
+@media (min-width: 576px) {
+  .new-order-width-popup {
+    max-width: 60%
+  }
+}

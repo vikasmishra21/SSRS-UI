@@ -1,0 +1,33 @@
+<div class="modal-header modal-header-global">
+  <h4 class="modal-title">Image Viewer</h4>
+  <i class="fa fa-times" aria-hidden="true" (click)="activeModal.dismiss('Cross click')"></i>
+</div>
+<div class="modal-body">
+  <div class="col-md-12 d-flex flex-column">
+    <div class="col-md-12 d-flex flex-row">
+      <div class="radio col-md-2">
+        <input type="radio" class="form-check-input" [(ngModel)]="imageview" (ngModelChange)="GetImageUrl()" name="imgRadios" id="imgradios"
+          value="1" checked>
+        <label for="imgradios">Front
+        </label>
+      </div>
+      <div class="radio col-md-2">
+        <input type="radio" class="form-check-input" [(ngModel)]="imageview" (ngModelChange)="GetImageUrl()" name="imgRadios" id="imgradios2"
+          value="2">
+        <label for="imgradios2">Back
+        </label>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="col-md-12 p-2">
+      <div *ngIf="!imgsrc" class="alert alert-info" role="alert">
+        No Image Found.
+      </div>
+      <img *ngIf="imgsrc" style="width: 100%;" [attr.src]="imgsrc">
+    </div>
+  </div>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="activeModal.close('Close click')">Close</button>
+</div>

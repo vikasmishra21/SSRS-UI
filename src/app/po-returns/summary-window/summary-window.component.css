@@ -1,0 +1,17 @@
+.red-row {
+  background-color: red;
+  color: #fff;
+}
+
+.green-row {
+  background-color: green;
+  color: #fff;
+}
+
+.table td,
+.table th {
+  padding: 0.2rem 0.3rem;width:25%;
+}
+.binCount td,.binCount th{width:29%}
+
+tbody,tr,thead{width:100%}

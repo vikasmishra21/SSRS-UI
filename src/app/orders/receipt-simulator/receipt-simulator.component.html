@@ -1,0 +1,21 @@
+﻿<div class="modal-header modal-header-global">
+  <h4 class="modal-title">Receipt Simulator</h4>
+  <i class="fa fa-times" aria-hidden="true" (click)="activeModal.dismiss('Cross click')"></i>
+</div>
+<div class="modal-body" >
+  <div class="flex-row" *ngIf="Count > 0">
+    <span style="float:left;padding-right:10px;display:inline-block">Enter the % of records:</span>
+    <input class="form-control col-md-4" name="recordCount" if="count" placeholder="Enter %" type="text" [(ngModel)]="receiptCount" />
+   
+  </div>
+  <div class="flex-row" *ngIf="Count == 0">
+    **Please generate initial mailer to set the receipt date.
+  </div>
+</div>
+<div class="modal-footer">
+  <div class="pull-right">
+   
+    <button  *ngIf="Count > 0" type="button" class="btn btn-success" (click)="ok()">OK</button>
+    <button type="button" class="btn btn-danger" (click)="activeModal.dismiss('Close click')">Close</button>
+  </div>
+</div>
