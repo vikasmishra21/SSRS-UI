@@ -40,7 +40,7 @@
     "ngx-progressbar": "^2.1.1",
     "primeng": "^5.0.2",
     "rxjs": "^5.5.6",
-    "underscore": "^1.8.3",
+    "underscore": "^1.12.1",
     "zingchart": "^2.6.2",
     "zone.js": "^0.8.20"
   },
